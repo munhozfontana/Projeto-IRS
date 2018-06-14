@@ -14,7 +14,9 @@ export class TelaSeletoresComponent implements OnInit {
   ufs: any;
   municipios: any;
 
-  seletoreLocal = {
+  template = 0;
+
+  seletorLocal = {
     uf: '',
     municipio: '',
     bairro: '',
@@ -22,17 +24,18 @@ export class TelaSeletoresComponent implements OnInit {
     instSau: ''
   };
 
-  seletoreIRS = {
+  seletorIRS = {
     persAva: '',
     abranVi: '',
     dimAn: ''
   };
 
-  seletoreIQS = {
+  seletorIQS = {
     persAva: '',
     abranVi: '',
     dimAn: ''
   };
+
   constructor(
     private telaSeletoresService: TelaSeletoresService
   ) { }
@@ -64,6 +67,10 @@ export class TelaSeletoresComponent implements OnInit {
       this.municipios = dados;
       console.log(this.municipios);
     });
+  }
+
+  selecSis(valor) {
+    this.template = valor;
   }
 
   ngOnInit() {
