@@ -15,4 +15,4 @@ const TelaSeletoresRoutes = [
     ],
     exports: [RouterModule]
 })
-export class TelaSeletoresRoutingModule {}
+export class TelaSeletoresRoutingModule { }
