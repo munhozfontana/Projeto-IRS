@@ -14,7 +14,10 @@ export class TelaSeletoresComponent implements OnInit {
   ufs: any;
   municipios: any;
 
-  template = 0;
+  boteosSeletores: boolean;
+  templateIRS: boolean;
+  templateIQS: boolean;
+  boteosVoltar: boolean;
 
   seletorLocal = {
     uf: '',
@@ -69,11 +72,30 @@ export class TelaSeletoresComponent implements OnInit {
     });
   }
 
-  selecSis(valor) {
-    this.template = valor;
+  exibirTemp() {
+    this.boteosSeletores = true;
+    this.templateIRS = false;
+    this.templateIQS = false;
+    this.boteosVoltar = false;
+  }
+
+  exibirTempIQS() {
+    this.templateIQS = true;
+    this.boteosVoltar = true;
+    this.boteosSeletores = false;
+  }
+
+  exibirTempIRS() {
+    this.templateIRS = true;
+    this.boteosVoltar = true;
+    this.boteosSeletores = false;
   }
 
   ngOnInit() {
+    this.boteosSeletores = true;
+    this.templateIRS = false;
+    this.templateIQS = false;
+    this.boteosVoltar = false;
     // this.getInstituicao();
     // this.getTipoInst();
     this.getUfs();

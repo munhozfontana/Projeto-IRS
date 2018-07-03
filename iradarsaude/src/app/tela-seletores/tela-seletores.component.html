@@ -1,27 +1,46 @@
-<div class="ui  segment">
+<div class="ui container segment">
 <div class="ui two column grid container">
   
-    <div class="row">
+    <div class="row" *ngIf="boteosSeletores">
         <div class=" column ui center aligned  ">
-            <button (click)='selecSis(1)' class="huge ui red button">
+            <button (click)="exibirTempIQS()" class="huge ui red button">
               IQuality Saúde
             </button>
           </div>
           <div class=" column ui center aligned  ">
-              <button (click)='selecSis(2)' class="huge ui blue button">
+              <button (click)="exibirTempIRS()" class="huge ui blue button">
                 IRadar Saúde
               </button>
             </div>
+
+            
       </div>
 
-   
+    </div>
     
+        <div class="ui vertical stripe center aligned segment" *ngIf="boteosSeletores">
+          <div class="ui text container segment">
+            <p>Selecione uma das opções acima.</p>
+            <a class="ui large button">Leia mais</a>
+            <h4 class="ui horizontal header divider">
+              <a href="#">Case Studies</a>
+            </h4>
+           
+          </div>
+        </div>
+
+
+  <div class="ui stackable one column grid" *ngIf="boteosVoltar">
+    <div class="column">
+      <button class="large ui black right floated linkedin button" (click)="exibirTemp()">Voltar</button>
+    </div>
   </div>
 
+   
   
 
-<div *ngIf="template===1">
-
+<div *ngIf="templateIQS">
+<!-- 
     <div class="ui vertical stripe center aligned segment">
         <div class="ui text container segment">
           <h3 class="ui header">IQuality Saúde</h3>
@@ -33,7 +52,7 @@
           </h4>
          
         </div>
-      </div>
+      </div> -->
 
   <div class="ui sub header">Seletores IQuality Saúde</div>
   <div class="ui segment">
@@ -132,23 +151,12 @@
 
   </div>
 </div>
-<div  *ngIf="template===0">
 
-    <div class="ui vertical stripe center aligned segment">
-        <div class="ui text container segment">
-          <p>Selecione uma das opções acima.</p>
-          <a class="ui large button">Leia mais</a>
-          <h4 class="ui horizontal header divider">
-            <a href="#">Case Studies</a>
-          </h4>
-         
-        </div>
-      </div>
-</div>
 
-<div  *ngIf="template===2">
 
-    <div class="ui vertical stripe center aligned segment">
+<div  *ngIf="templateIRS">
+
+    <!-- <div class="ui vertical stripe center aligned segment">
         <div class="ui text container segment">
           <h3 class="ui header">IRadar Saúde</h3>
           <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by 
@@ -159,7 +167,7 @@
           </h4>
          
         </div>
-      </div>
+      </div> -->
 
 <div class="ui sub header">Seletores IRadar Saúde</div>
 <div class="ui segment">
