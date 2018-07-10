@@ -1,15 +1,17 @@
     <div class="ui top attached demo menu">
 
-    <a class="item text" (click)="sidebar.toggle()">
+    <a style="width: 75% ;background-color: black" class="item text" (click)="sidebar.toggle()">
         <i class="sidebar icon"></i>
         <b>Menu</b>
     </a>
-    <a class="right item text" [routerLink]="['login']">
-        <b>Sign out</b>
-    </a>
+    <a  style="width: 25% ;background-color: black;  padding-left: 10%;" class="item text" [routerLink]="['login']">
+            <b >Logout</b>
+        </a>
+   
 </div>
 
-<sui-sidebar-container class="ui bottom attached segment">
+
+<sui-sidebar-container style="background-color: transparent"  class="ui bottom attached segment">
     <sui-sidebar class="inverted vertical" #sidebar>
         <a class="item" (click)="sidebar.close()" [routerLink]="['']">Home</a>
         <a class="item" (click)="sidebar.close()" [routerLink]="['/telaSeletorores']">Seletores</a>
