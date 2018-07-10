@@ -1,0 +1,24 @@
+.ui.attached.menu:not(.tabular) {
+    // border: 1px solid #2525d2;
+    background-color: rgb(9, 12, 21);
+}
+
+.right.item.text, .item.text {
+    color: white;
+    font-family: vidaloka, serif;
+    font-size: 1em;
+}
+
+.ui.attached.menu:not(.tabular) {
+    border: 1px solid #090c15;
+}
+
+.ui.link.menu .item:hover, .ui.menu .dropdown.item:hover, .ui.menu .link.item:hover, .ui.menu a.item:hover {
+    color: red;
+}
+
+.pushable>.pusher {
+
+    
+    
+}
