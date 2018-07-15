@@ -10,7 +10,7 @@ module.exports.estado = function (application, req, res) {
             res.status(400).send(error);
         }
         
-        res.status(200).json(result);
+        res.status(200).json(result.rows);
     });
 }
 
@@ -26,7 +26,7 @@ module.exports.municipio = function (application, req, res) {
             res.status(400).send(error);
         }
 
-        res.status(200).json(result);
+        res.status(200).json(result.rows);
     });
 }
 
@@ -41,7 +41,7 @@ module.exports.tipoInstituicao = function (application, req, res) {
             console.log(error);
             res.status(400).send(error);
         }
-        res.status(200).json(result);
+        res.status(200).json(result.rows);
     });
 }
 
@@ -56,6 +56,94 @@ module.exports.instituicao = function (application, req, res) {
             console.log(error);
             res.status(400).send(error);
         }
-        res.status(200).json(result);
+        res.status(200).json(result.rows);
+    });
+}
+
+
+
+
+//Controle de insituição, caso sucesso, retorna o estado do esquema dfdwp.td_instituicao
+module.exports.estadosAtualizados = function (application, req, res) {
+
+    var ufId = req.params.ufId;
+    
+    var conexaoPool = application.config.dbConnection();
+    var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
+
+    model.getEstadosAtualizados(ufId, function (error, result) {
+        if (error) {
+            console.log(error);
+            res.status(400).send(error);
+        }
+        res.status(200).json(result.rows);
+    });
+}
+
+//Controle de insituição, caso sucesso, retorna o estado do esquema dfdwp.td_instituicao
+module.exports.municipiosAtualizados = function (application, req, res) {
+
+    var municipioId = req.params.municipioId;
+
+    var conexaoPool = application.config.dbConnection();
+    var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
+
+    model.getMunicipiosAtualizados(municipioId, function (error, result) {
+        if (error) {
+            console.log(error);
+            res.status(400).send(error);
+        }
+        res.status(200).json(result.rows);
+    });
+}
+
+//Controle de insituição, caso sucesso, retorna o estado do esquema dfdwp.td_instituicao
+module.exports.tipoInstituicaoAtualizada = function (application, req, res) {
+
+    var tipoId = req.params.tipoId;
+
+    var conexaoPool = application.config.dbConnection();
+    var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
+
+    model.getTipoInstituicaoAtualizada(tipoId, function (error, result) {
+        if (error) {
+            console.log(error);
+            res.status(400).send(error);
+        }
+        res.status(200).json(result.rows);
+    });
+}
+
+//Controle de insituição, caso sucesso, retorna o estado do esquema dfdwp.td_instituicao
+module.exports.tipoInstituicaoAtualizadaUf = function (application, req, res) {
+
+    var tipoId = req.params.tipoId;
+    var idMunicipio = req.params.idMunicipio;
+    
+    var conexaoPool = application.config.dbConnection();
+    var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
+
+    model.getTipoInstituicaoAtualizadaUf(tipoId, idMunicipio, function (error, result) {
+        if (error) {
+            console.log(error);
+            res.status(400).send(error);
+        }
+        res.status(200).json(result.rows);
+    });
+}
+
+//Controle de insituição, caso sucesso, retorna o estado do esquema dfdwp.td_instituicao
+module.exports.instituicaoAtualizada = function (application, req, res) {
+
+    var instituicaoId = req.params.instituicaoId;
+    var conexaoPool = application.config.dbConnection();
+    var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
+
+    model.getInstituicaoAtualizada(instituicaoId, function (error, result) {
+        if (error) {
+            console.log(error);
+            res.status(400).send(error);
+        }
+        res.status(200).json(result.rows);
     });
 }
