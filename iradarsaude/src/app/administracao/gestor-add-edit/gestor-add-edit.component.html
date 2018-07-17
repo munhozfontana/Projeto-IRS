@@ -31,7 +31,7 @@
             </div>
 
             <div class="field">
-              <div class="two fields">
+              <div class="three fields">
 
                 <div class="field">
                   <label>Login</label>
@@ -41,6 +41,11 @@
                 <div class="field">
                   <label>Password</label>
                   <input type="text" name="passW" placeholder="passW" [(ngModel)]="gestor.passW" required #passW>
+                </div>
+                
+                <div class="field">
+                  <label>Confirmar Password</label>
+                  <input type="text" name="passConf" placeholder="passConf" [(ngModel)]="gestor.passConf" required #passConf>
                 </div>
 
               </div>
@@ -258,16 +263,6 @@
               </div>
             </div>
 
-            <div class="ui stackable two column grid">
-              <div class="column">
-                <button class="ui secondary left labeled icon button" type="submit" (click)="contatoActive = true">
-                  <i class="angle double left icon"></i>Voltar</button>
-              </div>
-              <div class="column">
-                <button class="ui secondary right labeled icon button right floated" (click)="perfilActive = true">
-                  <i class="angle double right icon"></i>Próximo</button>
-              </div>
-            </div>
           </form>
           <br>
           <br>
@@ -331,6 +326,19 @@
               </div>
             </div>
           </div>
+
+
+          <div class="ui stackable two column grid">
+              <div class="column">
+                <button class="ui secondary left labeled icon button" type="submit" (click)="contatoActive = true">
+                  <i class="angle double left icon"></i>Voltar</button>
+              </div>
+              <div class="column">
+                <button class="ui secondary right labeled icon button right floated" (click)="perfilActive = true">
+                  <i class="angle double right icon"></i>Próximo</button>
+              </div>
+            </div>
+
         </div>
 
         <!--fim da aba Instituições-->
