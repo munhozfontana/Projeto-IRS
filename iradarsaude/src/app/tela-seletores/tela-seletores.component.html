@@ -40,19 +40,6 @@
   
 
 <div *ngIf="templateIQS">
-<!-- 
-    <div class="ui vertical stripe center aligned segment">
-        <div class="ui text container segment">
-          <h3 class="ui header">IQuality Saúde</h3>
-          <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by 
-            providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention.</p>
-          <a class="ui large button">Leia mais</a>
-          <h4 class="ui horizontal header divider">
-            <a href="#">Case Studies</a>
-          </h4>
-         
-        </div>
-      </div> -->
 
   <div class="ui sub header">Seletores IQuality Saúde</div>
   <div class="ui segment">
@@ -115,7 +102,7 @@
       <div class="field">
         <div class="fields">
 
-          <div class="four wide field">
+          <div class="five wide field">
             <label>Perspectiva Avaliativa</label>
             <select class="ui dropdown" name="persAva" [(ngModel)]="seletorIQS.persAva" required #persAva>
               <option value="">Selecione</option>
@@ -123,7 +110,7 @@
             </select>
           </div>
 
-          <div class="six wide field">
+          <div class="five wide field">
             <label>Abrangência - Visão</label>
             <select class="ui dropdown" name="abranVi" [(ngModel)]="seletorIQS.abranVi" required #abranVi>
               <option value="">Selecione</option>
@@ -156,18 +143,6 @@
 
 <div  *ngIf="templateIRS">
 
-    <!-- <div class="ui vertical stripe center aligned segment">
-        <div class="ui text container segment">
-          <h3 class="ui header">IRadar Saúde</h3>
-          <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by 
-            providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention.</p>
-          <a class="ui large button">Leia mais</a>
-          <h4 class="ui horizontal header divider">
-            <a href="#">Case Studies</a>
-          </h4>
-         
-        </div>
-      </div> -->
 
 <div class="ui sub header">Seletores IRadar Saúde</div>
 <div class="ui segment">
@@ -228,22 +203,27 @@
     <div class="field">
       <div class="fields">
 
-        <div class="four wide field">
+        <div class="eight wide field">
           <label>Perspectiva Avaliativa</label>
           <select class="ui dropdown" name="persAva" [(ngModel)]="seletorIQS.persAva" required #persAva>
             <option value="">Selecione</option>
             <option *ngFor="let persAva of persAvas" value="{{persAva.persAva}}">{{persAva.persAva}}</option>
           </select>
         </div>
-        <div class="four wide field">
+        <div class="eight wide field">
           <label>Perspectiva Avaliativa</label>
           <select class="ui dropdown" name="persAva" [(ngModel)]="seletorIQS.persAva" required #persAva>
             <option value="">Selecione</option>
             <option *ngFor="let persAva of persAvas" value="{{persAva.persAva}}">{{persAva.persAva}}</option>
           </select>
         </div>
+      </div>
+    </div>
 
-        <div class="six wide field">
+        <div class="field">
+          <div class="fields">
+
+        <div class="eight wide field">
           <label>Abrangência - Visão</label>
           <select class="ui dropdown" name="abranVi" [(ngModel)]="seletorIRS.abranVi" required #abranVi>
             <option value="">Selecione</option>
@@ -251,7 +231,7 @@
           </select>
         </div>
 
-        <div class="six wide field">
+        <div class="eight wide field">
           <label>Dimensão Ánalitica</label>
           <select class="ui dropdown" name="dimAn" [(ngModel)]="seletorIRS.dimAn" required #dimAn>
             <option value="">Selecione</option>
