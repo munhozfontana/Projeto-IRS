@@ -284,39 +284,43 @@
                 <table class="ui selectable inverted striped table">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Status</th>
-                      <th>Notes</th>
-                      <th class="right aligned">Ação</th>
+                      <th class="ui center aligned collapsing">Tipo de Instituição</th>
+                      <th class="ui center aligned collapsing">Instituição de Saúde</th>
+                      <th class="ui center aligned collapsing">Estado</th>
+                      <th class="ui center aligned collapsing">Municipio</th>
+                      <th class="ui center aligned collapsing">Ação</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr class="ui center aligned collapsing">
                       <td>John</td>
                       <td>Approved</td>
                       <td>None</td>
-                      <td class="right aligned">
-                        <a class="ui google plus icon button circular" suiPopup popupHeader="Remover" popupInverted="true" (click)="deletarEmpresa(empresa)">
+                      <td>None</td>
+                      <td >
+                        <a class="mini ui google plus icon button circular" suiPopup popupHeader="Remover" popupInverted="true" (click)="deletarEmpresa(empresa)">
                           <i class="trash alternate icon"></i>
                         </a>
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="ui center aligned collapsing">
                       <td>Jamie</td>
                       <td>Approved</td>
                       <td>None</td>
-                      <td class="right aligned">
-                        <a class="ui google plus icon button circular" suiPopup popupHeader="Remover" popupInverted="true" (click)="deletarEmpresa(empresa)">
+                      <td>None</td>
+                      <td >
+                        <a class="mini ui google plus icon button circular" suiPopup popupHeader="Remover" popupInverted="true" (click)="deletarEmpresa(empresa)">
                           <i class="trash alternate icon"></i>
                         </a>
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="ui center aligned collapsing">
                       <td>Jill</td>
                       <td>Denied</td>
                       <td>None</td>
-                      <td class="right aligned">
-                        <a class="ui google plus icon button circular" suiPopup popupHeader="Remover" popupInverted="true" (click)="deletarEmpresa(empresa)">
+                      <td>None</td>
+                      <td >
+                        <a class="mini ui google plus icon button circular" suiPopup popupHeader="Remover" popupInverted="true" (click)="deletarEmpresa(empresa)">
                           <i class="trash alternate icon"></i>
                         </a>
                       </td>
@@ -335,28 +339,50 @@
       <!--incio da aba Perfil-->
       <div class="ui bottom attached segment" suiTabContent="5">
 
+          <div class="ui four column centered grid" *ngIf="BotoesPrincipais">
+              <div class="column"></div>
+              <div class="column"></div>
+              <div class="column"></div>
 
+              <div class="one column centered row" >
         <div class="ui buttons">
-          <button class="ui linkedin button">Selecionar um perfil já existente</button>
+          <button class="ui black button" value="existente" (click)="ativarFuncionalidade(existente.value)" #existente>Selecionar um perfil já existente</button>
           <div class="or" data-text="ou"></div>
-          <button class="ui green button">Criar um novo perfil</button>
+          <button class="ui black button" value="novo" (click)="ativarFuncionalidade(novo.value)" #novo>Criar um novo perfil</button>
         </div>
+      </div>
 
-        <form class="ui form" #fAddPerfil="ngForm" (ngSubmit)="salvarPerfil(fAddPerfil)">
+      </div>
 
-          <div class="ui stackable two column grid">
+        <form class="ui form" #fAddPerfil="ngForm" (ngSubmit)="salvarPerfil(fAddPerfil)" *ngIf="controleSelePerfilExistent">
+            <div class="header">
 
-            <div class="column">
-              <label>Perfil IRadar Saude</label>
-              <select class="ui dropdown" name="perfilIRS" [(ngModel)]="perfilIRS.perfilIRS" required #perfilIRS>
-                <option value="">Selecione um Perfil</option>
-                <option *ngFor="let perfilIRS of perfisIRS" value="{{perfilIRS.perfilIRS}}">{{perfilIRS.perfilIRS}}</option>
-              </select>
+                <div class="ui grid">
+                  <div class="fifteen wide center aligned column">
+                    Selecão de Perfil
+                  </div>
+                  <div class="one wide column">
+                    <i class="big close red link icon" (click)="VoltarBotoesPrin()" suiPopup popupHeader="Cancelar" popupInverted="true"></i>
+                  </div>
+                </div>
+              </div>
+          <div class="ui  grid">
+
+            <div class="sixteen wide column">
+              <p>Selecione um dos Sistemas</p>
+                <div class="ui grid">
+                        <div class="three wide column">
+                            <sui-radio-button name="example" value="hello" [(ngModel)]="eRadio">Perfis do IRadar Saude</sui-radio-button>
+                        </div>
+                        <div class="three wide column">
+                            <sui-radio-button name="example" value="world" [(ngModel)]="eRadio">Perfis do IQuality Saude</sui-radio-button>
+                        </div>
+                      </div>
             </div>
 
-            <div class="column">
-              <label>Perfil IQuality Saude</label>
-              <select class="ui dropdown" name="perfilIQS" [(ngModel)]="perfilIRS.perfilIRS" required #perfilIRS>
+            <div class="sixteen wide column">
+              <label>Selecione o Perfil</label>
+              <select class="ui dropdown" name="perfilIQS" [(ngModel)]="perfil.idPerfil" required #perfilIRS>
                 <option value="">Selecione um Perfil</option>
                 <option *ngFor="let perfilIQS of perfisIQSs" value="{{perfilIQS.perfilIRS}}">{{perfilIRS.perfilIRS}}</option>
               </select>
@@ -366,6 +392,113 @@
 
         </form>
 
+
+        <form class="ui form" #fAddPerfilNovo="ngForm" (ngSubmit)="salvarPerfil(fAddPerfilNovo)" *ngIf="controleCriarNovoPerfil">
+            <div class="header">
+
+                <div class="ui grid">
+                  <div class="fifteen wide center aligned column">
+                    Criação de Perfil
+                  </div>
+                  <div class="one wide column">
+                    <i class="big close red link icon" (click)="VoltarBotoesPrin()" suiPopup popupHeader="Cancelar" popupInverted="true"></i>
+                  </div>
+                </div>
+              </div>  
+
+              <div class="ui grid">
+            
+                  <div class="six wide column">
+                  <label>First Name</label>
+                  <input type="text" name="first-name" placeholder="First Name">
+                  </div>
+              </div>
+
+          <div class="ui grid">
+
+              <div class="eight wide column">
+                  <label>Selecione o Perfil IRadar Saude</label>
+                  <select class="ui dropdown" name="perfilIQS" [(ngModel)]="perfil.idPerfil" required #perfilIRS>
+                    <option value="">Selecione um Perfil</option>
+                    <option *ngFor="let perfilIQS of perfisIQSs" value="{{perfilIQS.perfilIRS}}">{{perfilIRS.perfilIRS}}</option>
+                  </select>
+                </div>
+
+                <div class="eight wide column">
+                    <label>Selecione o Perfil IQuality Saude</label>
+                    <select class="ui dropdown" name="perfilIQS" [(ngModel)]="perfil.idPerfil" required #perfilIRS>
+                      <option value="">Selecione um Perfil</option>
+                      <option *ngFor="let perfilIQS of perfisIQSs" value="{{perfilIQS.perfilIRS}}">{{perfilIRS.perfilIRS}}</option>
+                    </select>
+                  </div>
+            </div>
+          </form>
+          <div class="ui stackable two column grid">
+              <div class="column">
+                <button class="ui secondary left labeled icon button" (click)="instActive = true">
+                  <i class="angle double left icon"></i>Voltar</button>
+              </div>
+              <div class="column">
+                <button class="ui google plus right labeled icon button right floated">
+                  <i class="angle double right icon"></i>Aplicar</button>
+              </div>
+            </div>
+
+          <br>
+          <br>
+          <br>
+  
+          <div class="left floated left aligned sixteen wide column" *ngIf="perfisForm" >
+            <div class="ui raised segment">
+              <a class="ui red ribbon label">PERFIS CADASTRADoS</a>
+              <p></p>
+  
+              <div class="ui stackable one column grid">
+  
+                <div class="sixteen wide column">
+                  <table class="ui selectable inverted striped table">
+                    <thead>
+                      <tr>
+                        <th class="ui center aligned collapsing">Sistema</th>
+                        <th class="ui center aligned collapsing">Nome do Modulo</th>
+                        <th class="ui center aligned collapsing">Ação</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="ui center aligned collapsing">
+                        <td>John</td>
+                        <td>Approved</td>
+                        <td >
+                          <a class="mini ui google plus icon button circular" suiPopup popupHeader="Remover" popupInverted="true" (click)="deletarEmpresa(empresa)">
+                            <i class="trash alternate icon"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr class="ui center aligned collapsing">
+                        <td>Jamie</td>
+                        <td>Approved</td>
+                        <td >
+                          <a class="mini ui google plus icon button circular" suiPopup popupHeader="Remover" popupInverted="true" (click)="deletarEmpresa(empresa)">
+                            <i class="trash alternate icon"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr class="ui center aligned collapsing">
+                        <td>Jill</td>
+                        <td>Denied</td>
+                        <td >
+                          <a class="mini ui google plus icon button circular" suiPopup popupHeader="Remover" popupInverted="true" (click)="deletarEmpresa(empresa)">
+                            <i class="trash alternate icon"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+  
 
 
 
@@ -400,16 +533,7 @@
         </div>
 
 
-        <div class="ui stackable two column grid">
-          <div class="column">
-            <button class="ui secondary left labeled icon button" (click)="instActive = true">
-              <i class="angle double left icon"></i>Voltar</button>
-          </div>
-          <div class="column">
-            <button class="ui google plus right labeled icon button right floated">
-              <i class="angle double right icon"></i>Aplicar</button>
-          </div>
-        </div>
+     
 
       </div>
       <!--fim da aba Perfil-->

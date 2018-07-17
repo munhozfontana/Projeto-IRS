@@ -9,7 +9,6 @@ import { SuiModule, SuiCheckboxModule, SuiRatingModule } from 'ng2-semantic-ui';
 import { TelaSeletoresRoutingModule } from './tela-seletores.router';
 import { TelaSeletoresService } from './tela-seletores.service';
 import { TelaSeletoresComponent } from './tela-seletores.component';
-import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   imports: [
@@ -20,8 +19,7 @@ import { NgPipesModule } from 'ngx-pipes';
     FormsModule,
     ReactiveFormsModule,
     TelaSeletoresRoutingModule,
-    HttpModule,
-    NgPipesModule
+    HttpModule
   ],
   declarations: [
     TelaSeletoresComponent

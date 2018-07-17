@@ -1,15 +1,13 @@
     <div class="ui top attached demo menu">
 
-    <a  class="item text" (click)="sidebar.toggle()">
+    <a class="item text" (click)="sidebar.toggle()">
         <i class="sidebar icon"></i>
         <b>Menu</b>
     </a>
-    <a class="item text right" [routerLink]="['login']">
-            <b >Logout</b>
-        </a>
-   
+    <a class="right item text" [routerLink]="['login']">
+        <b>Sign out</b>
+    </a>
 </div>
-
 
 <sui-sidebar-container class="ui bottom attached segment">
     <sui-sidebar class="inverted vertical" #sidebar>
@@ -17,7 +15,7 @@
         <a class="item" (click)="sidebar.close()" [routerLink]="['/telaSeletorores']">Seletores</a>
         <a class="item" (click)="sidebar.close()" [routerLink]="['/admin']">Administração</a>
     </sui-sidebar>
-    <sui-sidebar-sibling style="background-image: url(../assets/gifISR.gif)" [isDimmedWhenVisible]="true">
+    <sui-sidebar-sibling [isDimmedWhenVisible]="true">
         <div class="ui basic segment">
             <router-outlet></router-outlet>
         </div>
