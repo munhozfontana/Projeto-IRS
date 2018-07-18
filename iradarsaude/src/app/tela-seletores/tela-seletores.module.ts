@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgPipesModule } from 'ngx-pipes';
 
 
 import { SuiModule, SuiCheckboxModule, SuiRatingModule } from 'ng2-semantic-ui';
@@ -20,7 +21,8 @@ import { TelaSeletoresIqsComponent } from './tela-seletores-iqs/tela-seletores-i
     FormsModule,
     ReactiveFormsModule,
     TelaSeletoresRoutingModule,
-    HttpModule
+    HttpModule,
+    NgPipesModule
   ],
   declarations: [
     TelaSeletoresIrsComponent,
