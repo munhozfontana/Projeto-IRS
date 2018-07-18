@@ -9,5 +9,19 @@ html, body  {
  }
 
  .ui.inverted.table tr td {
-     padding: 0;
+     padding: 2px;
  }
+
+
+.TituloPagSelec{ 
+    font-size: 2.5em;
+    font-weight: 800;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+
+.ui.attached.label, .ui[class*="top attached"].label{
+    background-color: black;
+    color: white;
+}

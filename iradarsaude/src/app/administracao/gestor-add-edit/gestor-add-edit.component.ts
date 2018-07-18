@@ -10,6 +10,8 @@ export class GestorAddEditComponent implements OnInit {
   controleSelePerfilExistent = false;
   controleCriarNovoPerfil = false;
   BotoesPrincipais = true;
+  perfisForm = false;
+  DetalhePerfil = false;
 
 
   seletoreLocal = {
@@ -30,7 +32,7 @@ export class GestorAddEditComponent implements OnInit {
     instituicao: ''
   };
 
-  endereco =  {
+  endereco = {
     endereco: '',
     numero: '',
     bairro: '',
@@ -51,7 +53,6 @@ export class GestorAddEditComponent implements OnInit {
     idPerfil: ''
   };
 
-  perfisForm = false;
 
 
 
@@ -67,21 +68,25 @@ export class GestorAddEditComponent implements OnInit {
 
   ativarFuncionalidade(varialvel) {
     console.log(varialvel);
- if (varialvel === 'existente') {
- this.controleSelePerfilExistent = true;
- this.BotoesPrincipais = false;
- } else {
-   this.controleCriarNovoPerfil = true;
-   this.BotoesPrincipais = false;
-  }
+    if (varialvel === 'existente') {
+      this.controleSelePerfilExistent = true;
+      this.BotoesPrincipais = false;
+      this.DetalhePerfil = true;
+    } else {
+      this.controleCriarNovoPerfil = true;
+      this.BotoesPrincipais = false;
+      this.perfisForm = true;
+    }
   }
 
 
 
   VoltarBotoesPrin() {
     this.BotoesPrincipais = true;
+    this.perfisForm = false;
     this.controleSelePerfilExistent = false;
-      this.controleCriarNovoPerfil = false;
+    this.controleCriarNovoPerfil = false;
+    this.DetalhePerfil = false;
   }
 
   ngOnInit() {
