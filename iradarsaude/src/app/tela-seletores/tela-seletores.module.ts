@@ -7,7 +7,6 @@ import { HttpModule } from '@angular/http';
 import { SuiModule, SuiCheckboxModule, SuiRatingModule } from 'ng2-semantic-ui';
 
 import { TelaSeletoresRoutingModule } from './tela-seletores.router';
-import { TelaSeletoresComponent } from './tela-seletores.component';
 import { TelaSeletoresService } from './tela-seletores.service';
 import { TelaSeletoresIrsComponent } from './tela-seletores-irs/tela-seletores-irs.component';
 import { TelaSeletoresIqsComponent } from './tela-seletores-iqs/tela-seletores-iqs.component';
@@ -25,8 +24,7 @@ import { TelaSeletoresIqsComponent } from './tela-seletores-iqs/tela-seletores-i
   ],
   declarations: [
     TelaSeletoresIrsComponent,
-    TelaSeletoresIqsComponent,
-    TelaSeletoresComponent
+    TelaSeletoresIqsComponent
   ],
     exports: [
     ],
