@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
+
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -10,8 +10,8 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
-    path: 'telaSeletorores',
-    loadChildren: 'app/tela-seletores/tela-seletores.module#TelaSeletoresModule'
+    path: 'telaSeletores',
+    loadChildren: 'app/tela-seletores/tela-seletores.module#TelaSeletoresModule',
   },
   {
     path: 'painelOperacional',
