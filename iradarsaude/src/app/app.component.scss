@@ -17,8 +17,22 @@
     color: red;
 }
 
-.pushable>.pusher {
-
-    
-    
+.ui.bottom.attached.segment {
+    height: 95.2%;
 }
+
+
+
+.ui.vertical.inverted.menu .menu .item, .ui.vertical.inverted.menu .menu .item a:not(.ui) {
+    color: white;
+}
+
+.item {
+    color: white;
+    font-size: 1em;
+}
+
+.item.sub {
+    color:red;
+}
+
