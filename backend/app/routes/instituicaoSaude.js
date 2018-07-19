@@ -13,6 +13,9 @@ module.exports = function (application) {
     application.get('/instituicaoSaude/instituicao', function (req, res) {
         application.app.controllers.instituicaoSaude.instituicao(application, req, res);
     });
+    application.get('/instituicaoSaude/bairros', function (req, res) {
+        application.app.controllers.instituicaoSaude.bairros(application, req, res);
+    });
 
 
     application.get('/instituicaoSaude/estadosAtualizados/:ufId', function (req, res) {
@@ -29,5 +32,8 @@ module.exports = function (application) {
     });
     application.get('/instituicaoSaude/instituicaoAtualizada/:instituicaoId', function (req, res) {
         application.app.controllers.instituicaoSaude.instituicaoAtualizada(application, req, res);
+    });
+    application.get(`/instituicaoSaude/bairroAtualizado/:id_uf/:id_municipio/:no_bairro/:id_tipo_unidade/:id_unidade`, function (req, res) {
+        application.app.controllers.instituicaoSaude.bairroAtualizado(application, req, res);
     });
 }

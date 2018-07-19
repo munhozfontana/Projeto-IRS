@@ -29,6 +29,21 @@ module.exports.municipio = function (application, req, res) {
         res.status(200).json(result.rows);
     });
 }
+//Controle de bairros, caso sucesso, retorna o estado do esquema dfdwp..bairros
+module.exports.bairros = function (application, req, res) {
+
+    var conexaoPool = application.config.dbConnection();
+    var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
+
+    model.getBairros(function (error, result) {
+        if (error) {
+            console.log(error);
+            res.status(400).send(error);
+        }
+
+        res.status(200).json(result.rows);
+    });
+}
 
 //Controle de tipo de insituição, caso sucesso, retorna o estado do esquema dfdwp.td_tipo_unidade
 module.exports.tipoInstituicao = function (application, req, res) {
@@ -140,6 +155,24 @@ module.exports.instituicaoAtualizada = function (application, req, res) {
     var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
 
     model.getInstituicaoAtualizada(instituicaoId, function (error, result) {
+        if (error) {
+            console.log(error);
+            res.status(400).send(error);
+        }
+        res.status(200).json(result.rows);
+    });
+}
+
+//Controle de insituição, caso sucesso, retorna o bairro um ou mais
+//instituições de acordo  com os parametros passados
+module.exports.bairroAtualizado = function (application, req, res) {
+
+    var bairroIds = req.params;
+
+    var conexaoPool = application.config.dbConnection();
+    var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
+
+    model.getBairroAtualizado(bairroIds, function (error, result) {
         if (error) {
             console.log(error);
             res.status(400).send(error);

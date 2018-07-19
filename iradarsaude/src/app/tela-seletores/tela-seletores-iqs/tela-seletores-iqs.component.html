@@ -23,26 +23,27 @@
 
         <div class="four wide field">
           <label>Estado</label>
-          <select class="ui dropdown" name="uf" [(ngModel)]="seletorLocal.uf" required #uf>
+          <select class="ui dropdown" name="id_uf"   (change)="atualizaUf(seletorLocal)" [(ngModel)]="seletorLocal.id_uf" required #uf>
             <option value="">Selecione Estado</option>
-            <option *ngFor="let uf of ufs" value="{{uf.uf}}">{{uf.uf}}</option>
+            <option *ngFor="let uf of ufs" value="{{uf.id_uf}}">{{uf.uf_sigla}}</option>
           </select>
         </div>
 
         <div class="six wide field">
           <label>Municipio</label>
-          <select class="ui dropdown" name="municipio" [(ngModel)]="seletorLocal.municipio" required #municipio>
-            <option value="">Selecione municipio</option>
-            <option *ngFor="let municipio of municipios" value="{{municipio.municipio}}">{{municipio.municipio}}</option>
-          </select>
+          <select class="ui dropdown" name="id_municipio" (change)="atualizaMunicipio(seletorLocal)" [(ngModel)]="seletorLocal.id_municipio" required #municipio>
+              <option value="">Selecione municipio</option>
+              <option *ngFor="let municipio of municipios | unique: 'id_municipio'" value="{{municipio.id_municipio}}">{{municipio.no_municipio}}</option>
+            </select>
         </div>
 
         <div class="six wide field">
           <label>Bairro</label>
-          <select class="ui dropdown" name="bairro" [(ngModel)]="seletorLocal.bairro" required #bairro>
-            <option value="">Selecione Bairro</option>
-            <option *ngFor="let bairro of bairros" value="{{bairro.bairro}}">{{instituicao.sigla}}</option>
-          </select>
+          <select class="ui dropdown" (change)="atualizaBairro(seletorLocal)" [(ngModel)]="seletorLocal.no_bairro" name="bairro" required #bairro>
+              <option value="">Selecione Bairro</option>
+              <option *ngFor="let bairro of bairros | unique: 'no_bairro' "  value="{{bairro.no_bairro}}">{{bairro.no_bairro}}</option>
+            </select>
+            <!-- <input [readonly]="true"  [(ngModel)]="seletorLocal.no_bairro" name="bairro" type="text"> -->
         </div>
 
       </div>
@@ -53,17 +54,17 @@
 
         <div class="eight wide field">
           <label>Tipo de Instituição</label>
-          <select class="ui dropdown" name="tipInst" [(ngModel)]="seletorLocal.tipInst" required #tipInst>
+          <select  class="ui dropdown" name="id_tipo_unidade"  (change)="atualizaTipo(seletorLocal)" [(ngModel)]="seletorLocal.id_tipo_unidade" required #tipInst>
             <option value="">Selecione</option>
-            <option *ngFor="let tipInst of tipInsts" value="{{tipInst.tipInst}}">{{tipInst.tipInst}}</option>
+            <option *ngFor="let tipoInst of tipoInsts | unique: 'ds_tipo_unidade'" value="{{tipoInst.id_tipo_unidade}}">{{tipoInst.ds_tipo_unidade}}</option>
           </select>
         </div>
 
         <div class="eight wide field">
           <label>Instituição de Saúde</label>
-          <select class="ui dropdown" name="instSau" [(ngModel)]="seletorLocal.instSau" required #instSau>
+          <select class="ui dropdown" name="id_unidade" (change)="atualizaInstituicao(seletorLocal)" [(ngModel)]="seletorLocal.id_unidade" required #instSau>
             <option value="">Selecione</option>
-            <option *ngFor="let instSau of instsSau" value="{{instSau.instSau}}">{{instSau.instSau}}</option>
+            <option *ngFor="let instituicao of instituicoes" value="{{instituicao.id_unidade}}">{{instituicao.no_fantasia}}</option>
           </select>
         </div>
 
