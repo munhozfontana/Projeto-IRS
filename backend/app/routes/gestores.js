@@ -12,7 +12,7 @@ module.exports = function (application) {
 
 // inserir novo gestor
     application.post('/gestorNovo', function (req, res) {
+        console.log('asd')
         application.app.controllers.gestores.novoGestor(application, req, res);
-        console.log("teu cu 2")
     });
 }
