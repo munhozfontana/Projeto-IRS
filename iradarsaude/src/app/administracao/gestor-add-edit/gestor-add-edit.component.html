@@ -30,29 +30,9 @@
               </div>
             </div>
 
-            <div class="field">
-              <div class="three fields">
-
-                <div class="field">
-                  <label>Login</label>
-                  <input type="text" name="login" placeholder="login" [(ngModel)]="gestor.login" required #login>
-                </div>
-
-                <div class="field">
-                  <label>Password</label>
-                  <input type="text" name="passW" placeholder="passW" [(ngModel)]="gestor.passW" required #passW>
-                </div>
-                
-                <div class="field">
-                  <label>Confirmar Password</label>
-                  <input type="text" name="passConf" placeholder="passConf" [(ngModel)]="gestor.passConf" required #passConf>
-                </div>
-
-              </div>
-            </div>
 
             <div class="field">
-              <div class="three fields">
+              <div class="two fields">
 
                 <div class="field">
                   <label>Cargo</label>
@@ -64,6 +44,22 @@
                   <input type="text" name="funcao" placeholder="funcao" [(ngModel)]="gestor.funcao" required #funcao>
                 </div>
 
+              </div>
+            </div>
+
+
+
+            <div class="field">
+                <div class="two fields">
+  
+                <div class="field">
+                    <label>Tipo de Instituição</label>
+                    <select class="ui dropdown" name="instituicao" [(ngModel)]="gestor.cod_instituicao" required #instituicao>
+                      <option value="">Selecione o Tipo de Instituição</option>
+                      <option *ngFor="let instituicao of instituicoes" value="{{instituicao.cod_instituicao}}">{{instituicao.sigla}}</option>
+                    </select>
+                  </div>
+
                 <div class="field">
                   <label>Instituição</label>
                   <select class="ui dropdown" name="instituicao" [(ngModel)]="gestor.cod_instituicao" required #instituicao>
@@ -74,6 +70,28 @@
 
               </div>
             </div>
+
+
+            <div class="field">
+                <div class="three fields">
+  
+                  <div class="field">
+                    <label>Login</label>
+                    <input type="text" name="login" placeholder="login" [(ngModel)]="gestor.login" required #login>
+                  </div>
+  
+                  <div class="field">
+                    <label>Password</label>
+                    <input type="text" name="passW" placeholder="passW" [(ngModel)]="gestor.passW" required #passW>
+                  </div>
+                  
+                  <div class="field">
+                    <label>Confirmar Password</label>
+                    <input type="text" name="passConf" placeholder="passConf" [(ngModel)]="gestor.passConf" required #passConf>
+                  </div>
+  
+                </div>
+              </div>
 
             <div class="ui stackable one column grid">
               <div class="column">
@@ -375,32 +393,36 @@
                 </div>
               </div>
             </div>
+
             <div class="ui  grid">
 
-              <div class="sixteen wide column">
-                <p>Selecione um dos Perfis</p>
-                <div class="ui grid">
-                  <div class="three wide column">
-                    <sui-radio-button name="example" value="hello" [(ngModel)]="eRadio">Perfis do IRadar Saude</sui-radio-button>
+                  <div class="eight wide column">
+                    <sui-checkbox name="example" value="irs" [(ngModel)]="irs">Perfis do IRadar Saude</sui-checkbox>
                   </div>
-                  <div class="three wide column">
-                    <sui-radio-button name="example" value="world" [(ngModel)]="eRadio">Perfis do IQuality Saude</sui-radio-button>
-                  </div>
-                  <div class="six wide column">
-                    <sui-radio-button name="example" value="world" [(ngModel)]="eRadio">Perfis do IQuality Saude mais os do IRadar Saude</sui-radio-button>
-                  </div>
-                </div>
-              </div>
 
-              <div class="sixteen wide column">
-                <label>Selecione o Perfil</label>
-                <select class="ui dropdown" name="perfilIQS" [(ngModel)]="perfil.idPerfil" required #perfilIRS>
-                  <option value="">Selecione um Perfil</option>
-                  <option *ngFor="let perfilIQS of perfisIQSs" value="{{perfilIQS.perfilIRS}}">{{perfilIRS.perfilIRS}}</option>
-                </select>
-              </div>
+                  <div class="eight wide column">
+                    <sui-checkbox name="example" value="iqs" [(ngModel)]="iqs">Perfis do IQuality Saude</sui-checkbox>
+                  </div>
 
-            </div>
+
+                    <div class="eight wide column">
+                        <label>Selecione o Perfil</label>
+                        <select class="ui dropdown" name="perfilIQS" [(ngModel)]="perfil.idPerfil" required #perfilIRS>
+                          <option value="">Selecione um Perfil</option>
+                          <option *ngFor="let perfilIQS of perfisIQSs" value="{{perfilIQS.perfilIRS}}">{{perfilIRS.perfilIRS}}</option>
+                        </select>
+                    </div>
+                
+                    <div class="eight wide column">
+                        <label>Selecione o Perfil</label>
+                        <select class="ui dropdown" name="perfilIQS" [(ngModel)]="perfil.idPerfil" required #perfilIRS>
+                          <option value="">Selecione um Perfil</option>
+                          <option *ngFor="let perfilIQS of perfisIQSs" value="{{perfilIQS.perfilIRS}}">{{perfilIRS.perfilIRS}}</option>
+                        </select>
+                      </div>
+                        
+
+             </div>
 
           </form>
 
@@ -409,7 +431,7 @@
             <div class="item">
               <i class="list icon"></i>
               <div class="content">
-                <label class="header">Detalhes do Modulo Esclhido:</label>
+                <label class="header">Detalhes do(s) Perfil(s) Esclhido:</label>
                 <div class="description">
                   <ul class="ui list">
                     <li>Gaining Access</li>
@@ -442,6 +464,20 @@
                 <label>Nome do Perfil</label>
                 <input type="text" name="nomeperfil" placeholder="Digite o Nome do Perfil">
               </div>
+
+              <div class="five wide column">
+                <label>Nome do Novo Mudlo</label>
+                <input type="text" name="nomeperfil" placeholder="Digite o Nome do Perfil">
+              </div>
+
+              <div class="five wide column">
+                <label>Selecione a Visão:</label>
+                <select class="ui dropdown" name="visao" [(ngModel)]="visao.idVisao" required #perfilIRS>
+                  <option value="">Selecione uma Visão</option>
+                  <option *ngFor="let visao of visoes" value="{{visao.idVisao}}">{{visao.descricao}}</option>
+                </select>
+              </div>
+
             </div>
 
             <div class="ui grid">
@@ -560,8 +596,8 @@
                 <i class="angle double left icon"></i>Voltar</button>
             </div>
             <div class="column">
-              <button class="ui google plus right labeled icon button right floated">
-                <i class="angle double right icon"></i>Aplicar</button>
+              <button class="ui positive right labeled icon button right floated">
+                <i class="check circle right icon"></i>Aplicar</button>
             </div>
           </div>
 
