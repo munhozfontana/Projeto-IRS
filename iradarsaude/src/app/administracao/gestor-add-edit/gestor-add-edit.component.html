@@ -54,19 +54,24 @@
   
                 <div class="field">
                     <label>Tipo de Instituição</label>
-                    <select class="ui dropdown" name="instituicao" [(ngModel)]="gestor.cod_instituicao" required #instituicao>
+                    <select class="ui dropdown"   required #instituicao>
                       <option value="">Selecione o Tipo de Instituição</option>
                       <option *ngFor="let instituicao of instituicoes" value="{{instituicao.cod_instituicao}}">{{instituicao.sigla}}</option>
                     </select>
+                    <!-- <select class="ui dropdown" name="instituicao" [(ngModel)]="gestor.cod_instituicao" required #instituicao>
+                      <option value="">Selecione o Tipo de Instituição</option>
+                      <option *ngFor="let instituicao of instituicoes" value="{{instituicao.cod_instituicao}}">{{instituicao.sigla}}</option>
+                    </select> -->
                   </div>
 
                 <div class="field">
                   <label>Instituição</label>
-                  <select class="ui dropdown" name="instituicao" [(ngModel)]="gestor.cod_instituicao" required #instituicao>
+                  <select class="ui dropdown" name="cnpj" [(ngModel)]="gestor.cnpj" required #instituicao>
                     <option value="">Selecione Instituição</option>
-                    <option *ngFor="let instituicao of instituicoes" value="{{instituicao.cod_instituicao}}">{{instituicao.sigla}}</option>
+                    <option *ngFor="let instituicao of gestorInstituicao" value="{{instituicao.cnpj}}">{{instituicao.cnpj}}</option>
                   </select>
                 </div>
+
 
               </div>
             </div>
@@ -82,12 +87,12 @@
   
                   <div class="field">
                     <label>Password</label>
-                    <input type="text" name="passW" placeholder="passW" [(ngModel)]="gestor.passW" required #passW>
+                    <input type="text" name="password" placeholder="password" [(ngModel)]="gestor.password" required #password>
                   </div>
                   
                   <div class="field">
                     <label>Confirmar Password</label>
-                    <input type="text" name="passConf" placeholder="passConf" [(ngModel)]="gestor.passConf" required #passConf>
+                    <input type="text"  placeholder="passConf"  required #passConf>
                   </div>
   
                 </div>
