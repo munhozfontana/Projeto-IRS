@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, OnChanges, Output, SimpleChanges, SimpleChange } from '@angular/core';
 
+import { AdministracaoService } from '../administracao.service';
+
 @Component({
   selector: 'app-gestor-add-edit',
   templateUrl: './gestor-add-edit.component.html',
@@ -53,16 +55,16 @@ export class GestorAddEditComponent implements OnInit {
     idPerfil: ''
   };
 
-
-
-
   public gestorActive: boolean;
   public enderecoActive: boolean;
   public contatoActive: boolean;
   public instActive: boolean;
   public perfilActive: boolean;
+  gestorInstituicao: any;
 
-  constructor() {
+  constructor(
+    private administracaoService: AdministracaoService
+  ) {
     this.gestorActive = true;
   }
 
@@ -79,6 +81,11 @@ export class GestorAddEditComponent implements OnInit {
     }
   }
 
+  salvarGestor(fAddGestor) {
+    this.administracaoService.postGestor(fAddGestor.value).subscribe(
+      res => console.log(res)
+    )
+  }
 
 
   VoltarBotoesPrin() {
@@ -90,6 +97,12 @@ export class GestorAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getGestorInstituicao();
   }
 
+  getGestorInstituicao() {
+    this.administracaoService.getGestorInstituicao().subscribe(
+      res => {this.gestorInstituicao = res, console.log(res)}
+    );
+  }
 }
