@@ -3,7 +3,7 @@ module.exports.endereco = function (application, req, res) {
 
     var cpf = req.params.cpf;
 
-    var conexaoPool = application.config.dbConnectionGestor();
+    var conexaoPool = application.config.conexaoBD();
     var model = new application.app.models.enderecosDAO(conexaoPool);
 
     model.listaEnderecoById(cpf, function (error, result) {

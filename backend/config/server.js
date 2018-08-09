@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 
 consign()
     .include('app/routes')
-    .then('config/dbConnection.js')
-    .then('config/dbConnectionGestor.js')
+    .then('config/conexaoBD.js')
+    .then('config/conexaoBDKnex.js')
     .then('app/models')
     .then('app/controllers')
     .into(app);

@@ -1,7 +1,7 @@
 //Controle de do moduloIQS, tras todos os modulosIQS do banco
 module.exports.intiuicaoIRS = function (application, req, res) {
 
-    var conexaoPool = application.config.dbConnectionGestor();
+    var conexaoPool = application.config.conexaoBD();
     var model = new application.app.models.instituicaoIRSDAO(conexaoPool);
 
     model.listaInstituicoes(function (error, result) {

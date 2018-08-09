@@ -1,7 +1,7 @@
 //Controle de do moduloIRS, tras todos os modulosIRS do banco
 module.exports.modulosIRS = function (application, req, res) {
 
-    var conexaoPool = application.config.dbConnectionGestor();
+    var conexaoPool = application.config.conexaoBD();
     var model = new application.app.models.modulosIRSDAO(conexaoPool);
 
     model.listaModuloIRS(function (error, result) {

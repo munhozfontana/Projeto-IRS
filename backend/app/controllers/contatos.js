@@ -3,7 +3,7 @@ module.exports.contatoById = function (application, req, res) {
 
     var cpf = req.params.cpf;
 
-    var conexaoPool = application.config.dbConnectionGestor();
+    var conexaoPool = application.config.conexaoBD();
     var model = new application.app.models.contatosDAO(conexaoPool);
 
     model.listaContatoById(cpf, function (error, result) {

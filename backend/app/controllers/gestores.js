@@ -3,7 +3,7 @@ module.exports.gestor = function (application, req, res) {
 
     var cpf = req.params.cpf;
 
-    var conexaoPool = application.config.dbConnectionGestor();
+    var conexaoPool = application.config.conexaoBD();
     var model = new application.app.models.gestoresDAO(conexaoPool);
 
     model.listaGestorById(cpf, function (error, result) {
@@ -19,7 +19,7 @@ module.exports.gestor = function (application, req, res) {
 module.exports.novoGestor = function (application, req, res) {
     var gestor = req.body;
 
-    var conexaoPool = application.config.dbConnectionGestor();
+    var conexaoPool = application.config.conexaoBD();
     var model = new application.app.models.gestoresDAO(conexaoPool);
 
     model.cadastrarGestorById(gestor, function (error, result) {
@@ -34,7 +34,7 @@ module.exports.novoGestor = function (application, req, res) {
 //Controle de gestores, lista todas as instituicoes dos gestores
 module.exports.instituicoesGestor = function (application, req, res) {
 
-    var conexaoPool = application.config.dbConnectionGestor();
+    var conexaoPool = application.config.conexaoBD();
     var model = new application.app.models.gestoresDAO(conexaoPool);
 
     model.listaInstituicoesById(function (error, result) {

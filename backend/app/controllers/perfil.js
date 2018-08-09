@@ -1,7 +1,7 @@
 //Controle de do moduloIQS, tras todos os modulosIQS do banco
 module.exports.perfil = function (application, req, res) {
 
-    var conexaoPool = application.config.dbConnectionGestor();
+    var conexaoPool = application.config.conexaoBD();
     var model = new application.app.models.perfilDAO(conexaoPool);
 
     model.listaPerfis(function (error, result) {
