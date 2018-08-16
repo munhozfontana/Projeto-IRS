@@ -11,6 +11,20 @@ export class AdministracaoService {
   ) { }
 
 
+  // requisições HTTP Empresa
+  getEmpresaId(cnpj) {
+    return this.http
+      .get(`${ROTAS_API}empresa/${cnpj}`);
+  }
+  putEmpresa(empresa, cpf) {
+    return this.http
+      .put(`${ROTAS_API}empresa/${cpf}`, empresa);
+  }
+  postEmpresa(empresa) {
+    return this.http
+      .post(`${ROTAS_API}empresa`, empresa);
+  }
+
   // requisições HTTP Gestor
   getGestorInstituicao() {
     return this.http
@@ -25,6 +39,7 @@ export class AdministracaoService {
     return this.http
       .get(`${ROTAS_API}gestor/${cpf}`);
   }
+
   postGestor(gestor) {
     return this.http
       .post(`${ROTAS_API}gestorNovo`, gestor);
@@ -70,7 +85,7 @@ export class AdministracaoService {
 
   putContato(contato, cpf) {
     return this.http
-      .post(`${ROTAS_API}contato/${cpf}`, contato);
+      .put(`${ROTAS_API}contato/${cpf}`, contato);
   }
 
 
@@ -119,6 +134,92 @@ export class AdministracaoService {
   getMunicipios(id_uf) {
     return this.http
       .get(`${ROTAS_API}municipios/${id_uf}`);
+  }
+
+
+
+  // requisicoes HTTP do banco postgres, para a aba instituicoes do gestor
+  /*
+  * Protocolo HTTP
+  */
+  getSelecioneEstado() {
+    return this.http
+      .get(`${ROTAS_API}instituicaoSaude/estados`);
+  }
+
+  /*
+  * Protocolo HTTP
+  */
+  getSelecioneMunicipios() {
+    return this.http
+      .get(`${ROTAS_API}instituicaoSaude/municipios`);
+  }
+
+  //   /*
+  //   * Protocolo HTTP
+  //   */
+  getSelecioneBairro() {
+    return this.http
+      .get(`${ROTAS_API}instituicaoSaude/bairros`);
+  }
+
+  /*
+  * Protocolo HTTP
+  */
+  getSelecioneTipoInt() {
+    return this.http
+      .get(`${ROTAS_API}instituicaoSaude/tipoInstituicao`);
+  }
+
+  /*
+  * Protocolo HTTP
+  */
+
+  getSelecioneInt() {
+    return this.http
+      .get(`${ROTAS_API}instituicaoSaude/instituicao`);
+  }
+
+  /*
+  //   * Protocolo HTTP passando ufId para retornar todas instituições da mesma
+  //   */
+  getAtualizaUf(ufId) {
+    return this.http
+      .get(`${ROTAS_API}instituicaoSaude/estadosAtualizados/${ufId}`);
+  }
+
+  //   * Protocolo HTTP passando municipioId para retornar todas instituições da mesma
+  getAtualizaMunicipio(municipioId) {
+    return this.http
+      .get(`${ROTAS_API}instituicaoSaude/municipiosAtualizados/${municipioId}`);
+  }
+
+  //   * Protocolo HTTP passando tipoId da idMunicipio para retornar todas instituições da mesma
+  getAtualizaTipo(tipoId, idMunicipio) {
+    if (idMunicipio) {
+      return this.http
+        .get(`${ROTAS_API}instituicaoSaude/tipoInstituicaoAtualizada/${tipoId}/${idMunicipio}`);
+    } else {
+      return this.http
+        .get(`${ROTAS_API}instituicaoSaude/tipoInstituicaoAtualizada/${tipoId}`);
+    }
+  }
+
+  //   * Protocolo HTTP passando instituicaoId  para retornar todas instituições da mesma
+  getAtualizaInstituicao(instituicaoId) {
+    return this.http
+      .get(`${ROTAS_API}instituicaoSaude/instituicaoAtualizada/${instituicaoId}`);
+  }
+  //   * Protocolo HTTP passando instituicaoId  para retornar todas instituições da mesma
+  getAtualizaBairro(bairroIds) {
+    const nullo = '(null)';
+    return this.http
+      .get(`${ROTAS_API}instituicaoSaude/bairroAtualizado/${bairroIds.id_uf ||
+        nullo}/${bairroIds.id_municipio ||
+        nullo}/${bairroIds.no_bairro ||
+        nullo}/${bairroIds.id_tipo_unidade ||
+        nullo}/${bairroIds.id_unidade ||
+        nullo}`);
   }
 
 }
