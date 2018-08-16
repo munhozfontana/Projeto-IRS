@@ -1,6 +1,7 @@
-.ui.attached.menu:not(.tabular) {
-    // border: 1px solid #2525d2;
-    background-color: rgb(9, 12, 21);
+$cor-azul-padrao:#0076c3;
+
+.ui.attached.menu:not(.tabular), .inverted.vertical {
+    background-color: $cor-azul-padrao;
 }
 
 .right.item.text, .item.text {
@@ -14,7 +15,7 @@
 }
 
 .ui.link.menu .item:hover, .ui.menu .dropdown.item:hover, .ui.menu .link.item:hover, .ui.menu a.item:hover {
-    color: red;
+    color:black;
 }
 
 .ui.bottom.attached.segment {
@@ -33,6 +34,15 @@
 }
 
 .item.sub {
-    color:red;
+    color:black;
 }
 
+.configuracao {
+    background-color: #0a9599;
+
+}
+
+
+sui-sidebar-container.ui.bottom.attached.segment sui-sidebar.inverted.vertical div.menu a.item:hover{
+    color: black;
+}

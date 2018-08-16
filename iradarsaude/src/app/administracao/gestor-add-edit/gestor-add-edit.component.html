@@ -87,10 +87,10 @@
 
             <div class="ui stackable one column grid">
               <div class="column">
-                <button class="ui secondary left labeled icon button left floated btn-color" (click)="cancelarEmpresa(fAddEmpresa)">
-                  <i class="angle double left icon"></i> Voltar
+                <button class="ui left labeled icon button left floated btn-color" (click)="cancelarEmpresa(fAddEmpresa)">
+                  <i class="angle double left icon"></i> Cancelar
                 </button>
-                <button class="ui secondary right labeled icon button right floated btn-color" (click)="gestorActive = true ;salvarEmpresa(fAddEmpresa)">
+                <button class="ui right labeled icon button right floated btn-color" (click)="gestorActive = true ;salvarEmpresa(fAddEmpresa)">
                   <i class="angle double right icon"></i> Próximo
                 </button>
               </div>
@@ -155,10 +155,10 @@
 
             <div class="ui stackable one column grid">
               <div class="column">
-                <button class="ui secondary left labeled icon button left floated btn-color" (click)="empresaActive = true; backEmpresa(fAddGestor)">
+                <button class="ui left labeled icon button left floated btn-color" (click)="empresaActive = true; backEmpresa(fAddGestor)">
                   <i class="angle double left icon"></i> Voltar
                 </button>
-                <button class="ui secondary right labeled icon button right floated btn-color" (click)="enderecoActive = true; salvarGestor(fAddGestor)">
+                <button class="ui right labeled icon button right floated btn-color" (click)="enderecoActive = true; salvarGestor(fAddGestor)">
                   <i class="angle double right icon"></i> Próximo
                 </button>
               </div>
@@ -228,11 +228,11 @@
 
             <div class="ui stackable two column grid">
               <div class="column">
-                <button class="ui secondary left labeled icon button" (click)="gestorActive = true; backGestor()">
+                <button class="ui left labeled icon button" (click)="gestorActive = true; backGestor()">
                   <i class="angle double left icon"></i>Voltar</button>
               </div>
               <div class="column">
-                <button class="ui secondary right labeled icon button right floated" (click)="contatoActive = true; salvarEndereco(fAddEndereco)">
+                <button class="ui right labeled icon button right floated" (click)="contatoActive = true; salvarEndereco(fAddEndereco)">
                   <i class="angle double right icon"></i>Próximo</button>
               </div>
             </div>
@@ -282,7 +282,7 @@
             </div>
 
 
-            <table class="ui selectable celled inverted table">
+            <table class="ui selectable celled inverted blue table">
               <thead>
                 <tr>
                   <th class="ui center aligned collapsing">
@@ -339,11 +339,11 @@
 
             <div class="ui stackable two column grid">
               <div class="column">
-                <button class="ui secondary left labeled icon button" (click)="enderecoActive = true ; backEndereco()">
+                <button class="ui left labeled icon button" (click)="enderecoActive = true ; backEndereco()">
                   <i class="angle double left icon"></i>Voltar</button>
               </div>
               <div class="column">
-                <button class="ui secondary right labeled icon button right floated" (click)="instActive = true; salvarContato(fAddContato)">
+                <button class="ui right labeled icon button right floated" (click)="instActive = true; salvarContato(fAddContato)">
                   <i class="angle double right icon"></i>Próximo</button>
               </div>
             </div>
@@ -428,7 +428,7 @@
                 <div class="ui stackable one column grid">
   
                   <div class="sixteen wide column">
-                    <table class="ui selectable inverted striped table">
+                    <table class="ui selectable inverted striped blue table">
                       <thead>
                         <tr>
                           <th class="ui center aligned collapsing">Tipo de Instituição</th>
@@ -482,11 +482,11 @@
   
             <div class="ui stackable two column grid">
                 <div class="column">
-                  <button class="ui secondary left labeled icon button" (click)="backContato()">
+                  <button class="ui left labeled icon button" (click)="backContato()">
                     <i class="angle double left icon"></i>Voltar</button>
                 </div>
                 <div class="column">
-                  <button class="ui secondary right labeled icon button right floated" (click)="perfilActive = true; salvarInstituicao(fAddInstituicao)">
+                  <button class="ui right labeled icon button right floated" (click)="perfilActive = true; salvarInstituicao(fAddInstituicao)">
                     <i class="angle double right icon"></i>Próximo</button>
                 </div>
               </div>
@@ -506,9 +506,9 @@
 
             <div class="one column centered row">
               <div class="ui buttons">
-                <button class="ui black button" value="existente" (click)="ativarFuncionalidade(existente.value)" #existente>Selecionar um perfil já existente</button>
+                <button class="ui google plus button" value="existente" (click)="ativarFuncionalidade(existente.value)" #existente>Selecionar um perfil já existente</button>
                 <div class="or" data-text="ou"></div>
-                <button class="ui black button" value="novo" (click)="ativarFuncionalidade(novo.value)" #novo>Criar um novo perfil</button>
+                <button class="ui google plus button" value="novo" (click)="ativarFuncionalidade(novo.value)" #novo>Criar um novo perfil</button>
               </div>
             </div>
 
@@ -646,7 +646,7 @@
               <div class="ui stackable one column grid">
 
                 <div class="sixteen wide column">
-                  <table class="ui selectable inverted striped table">
+                  <table class="ui selectable inverted striped blue table">
                     <thead>
                       <tr>
                         <th class="ui center aligned collapsing">Sistema</th>
@@ -724,7 +724,7 @@
 
           <div class="ui stackable two column grid">
             <div class="column">
-              <button class="ui secondary left labeled icon button" (click)="instActive = true ; backInstituicao()">
+              <button class="ui left labeled icon button" (click)="instActive = true ; backInstituicao()">
                 <i class="angle double left icon"></i>Voltar</button>
             </div>
             <div class="column">
