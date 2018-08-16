@@ -1,3 +1,6 @@
+$cor-azul-padrao:#0076c3;
+
+
 .ui.labeled.icon.button, .ui.labeled.icon.buttons .button {
     margin-top: 1.6em;
 }
@@ -6,4 +9,9 @@
 .fifteen.wide.center.aligned.column {
     font-size: 1.9em;
     font-weight: 700;
+}
+
+.ui.right.labeled.icon.button.right.floated, .ui.left.labeled.icon.button {
+    background-color: $cor-azul-padrao;
+    color: white;
 }

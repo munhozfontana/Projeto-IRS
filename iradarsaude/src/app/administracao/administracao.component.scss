@@ -1,9 +1,7 @@
-// .container{
-//     display: flex;
-//     min-height: 100vh;
-//     flex-direction: column;
-//     margin-top: 10vh;
-//     margin-bottom: 10vh;
-//   }
-  
-  
+$cor-azul-padrao:#0076c3;
+
+
+.ui.labeled.icon.button,.ui.selectable.celled.table {
+background-color: $cor-azul-padrao;
+color: white;
+}
