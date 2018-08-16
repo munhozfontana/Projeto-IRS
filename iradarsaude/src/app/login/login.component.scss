@@ -1,3 +1,5 @@
+$cor-azul-padrao:#0076c3;
+
 html, body {
   height: 100%;
 }
@@ -21,7 +23,7 @@ html, body {
 
 
 .ui.red.image.header.segment.stacked.secondary, .ui.large.form.segment.stacked.secondary {
-  background-color: #090c15;
+  background-color: $cor-azul-padrao;
 }
 
 .ui.header .content {
