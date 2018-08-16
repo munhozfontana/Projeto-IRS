@@ -23,15 +23,19 @@ export class GestorAddEditComponent implements OnInit {
   formLocal: any;
   perfisIQSs: boolean;
 
-
-  seletoreLocal = {
-    uf: '',
-    municipio: '',
-    bairro: '',
-    tipInst: '',
-    instSau: ''
+  // declarações da aba Empresa
+  empresa = {
+    cnpj: '',
+    num_cnes: '',
+    razao_social: '',
+    endereco: '',
+    complemento: '',
+    numero: '',
+    cep: ''
   };
 
+
+  // declarações da aba Gestor
   gestor = {
     nome: '',
     cpf: '',
@@ -41,7 +45,7 @@ export class GestorAddEditComponent implements OnInit {
     funcao: '',
     instituicao: ''
   };
-
+  // declarações da aba endereço
   endereco = {
     endereco: '',
     numero: '',
@@ -51,11 +55,28 @@ export class GestorAddEditComponent implements OnInit {
     uf: '',
     municipio: ''
   };
-
+  // declarações da aba Contato
   contato = {
     email: '',
     tel1: '',
     tel2: ''
+  };
+
+  // declarações da aba instituições
+  instituicao = {
+    id_uf: '',
+    id_municipio: '',
+    idInstituicao_saude: '',
+    id_tipo_unidade: '',
+    no_bairro: ''
+  };
+
+  instituicoesGestor: any;
+  saveDados = {
+    getInstituicao: {},
+    getTipoInst: {},
+    getUfs: {},
+    getMunicipio: {}
   };
 
 
@@ -68,15 +89,23 @@ export class GestorAddEditComponent implements OnInit {
     nomeModuloperfil: ''
   };
 
-  public gestorActive = true;
+  // declarações das váriaveis das abas
+  public empresaActive = true;
+  public gestorActive = false;
   public enderecoActive = false;
   public contatoActive = false;
   public instActive = false;
   public perfilActive = false;
+
   gestorInstituicao: any;
   estados: any;
   municipios: any;
-  enderecoExistente = false;
+  putPermitido = false;
+  instituicoesAbaInst: any;
+  bairrosAbaInst: any;
+  tipoInstsAbaInst: any;
+  ufsAbaInst: any;
+  municipiosAbaInst: any;
   constructor(
     private administracaoService: AdministracaoService,
     private activatedRoute: ActivatedRoute,
@@ -98,6 +127,36 @@ export class GestorAddEditComponent implements OnInit {
     }
   }
 
+  // função para Salvar os dados da empresa do gestor
+  salvarEmpresa(fAddEmpresa) {
+    if (fAddEmpresa.status !== 'INVALID') {
+      console.log(fAddEmpresa.value);
+      if (this.params.id) {
+        this.administracaoService.putEmpresa(fAddEmpresa.value, this.params.id).subscribe(
+          res => {
+            this.getGestorById();
+            this.enderecoActive = true;
+          },
+          erro => {
+            console.log(erro);
+          }
+        );
+      } else {
+        this.administracaoService.postEmpresa(fAddEmpresa.value).subscribe(
+          res => {
+            this.paramsByPost = res;
+            this.enderecoActive = true;
+          },
+          erro => {
+            console.log(erro);
+          }
+        );
+      }
+    } else {
+      console.log('campos inválidos');
+    }
+  }
+
   // função para Salvar os dados básicos gestor
   salvarGestor(fAddGestor) {
     if (fAddGestor.status !== 'INVALID') {
@@ -106,7 +165,6 @@ export class GestorAddEditComponent implements OnInit {
           res => {
             this.getGestorEndereco();
             this.enderecoActive = true;
-            console.log(this.enderecoExistente);
           },
           erro => {
             console.log(erro);
@@ -124,6 +182,7 @@ export class GestorAddEditComponent implements OnInit {
           }
         );
       }
+      this.getEstado();
     } else {
       console.log('campos inválidos');
     }
@@ -131,11 +190,12 @@ export class GestorAddEditComponent implements OnInit {
 
   // função para Salvar os endereço do gestor
   salvarEndereco(fAddEndereco) {
-    console.log(this.enderecoExistente);
     if (fAddEndereco.status !== 'INVALID') {
-      if (this.enderecoExistente ) {
+      if (this.putPermitido) {
+        this.putPermitido = false;
         this.administracaoService.putEndereco(fAddEndereco.value, this.paramsById()).subscribe(
           res => {
+            this.getContatoById();
             this.contatoActive = true;
           },
           erro => {
@@ -155,6 +215,7 @@ export class GestorAddEditComponent implements OnInit {
           }
         );
       }
+      this.getContatoById();
     } else {
       console.log('campos inválidos');
     }
@@ -164,10 +225,10 @@ export class GestorAddEditComponent implements OnInit {
   // função para Salvar os contatos do gestor
   salvarContato(fAddContato) {
     if (fAddContato.status !== 'INVALID') {
-      if (this.params.id) {
+      if (this.putPermitido) {
+        this.putPermitido = false;
         this.administracaoService.putContato(fAddContato.value, this.paramsById()).subscribe(
           res => {
-            console.log(res);
             this.instActive = true;
           },
           erro => {
@@ -175,9 +236,9 @@ export class GestorAddEditComponent implements OnInit {
           }
         );
       } else {
+        fAddContato.value.cpf = this.paramsById();
         this.administracaoService.postContato(fAddContato.value).subscribe(
           res => {
-            console.log(res);
             this.paramsByPost = res;
             this.instActive = true;
           },
@@ -186,37 +247,38 @@ export class GestorAddEditComponent implements OnInit {
           }
         );
       }
+      this.getAbaInstituicoes();
     } else {
       console.log('campos inválidos');
     }
-    this.instActive = true;
   }
 
   // função para Salvar os contatos do gestor
   salvarInstituicao(fAddInstituicao) {
     if (fAddInstituicao.status !== 'INVALID') {
-      if (this.params.id) {
-        this.administracaoService.putInstituicao(fAddInstituicao.value, this.paramsById()).subscribe(
-          res => {
-            console.log(res);
-            this.perfilActive = true;
-          },
-          erro => {
-            console.log(erro);
-          }
-        );
-      } else {
-        this.administracaoService.postInstituicao(fAddInstituicao.value).subscribe(
-          res => {
-            console.log(res);
-            this.paramsByPost = res;
-            this.perfilActive = true;
-          },
-          erro => {
-            console.log(erro);
-          }
-        );
-      }
+      fAddInstituicao = this.correcaoInstituicao();
+      // if (this.putPermitido) {
+      //   this.putPermitido = false;
+      //   this.administracaoService.putInstituicao(fAddInstituicao.value, this.paramsById()).subscribe(
+      //     res => {
+      //       this.perfilActive = true;
+      //     },
+      //     erro => {
+      //       console.log(erro);
+      //     }
+      //   );
+      // } else {
+      this.administracaoService.postInstituicao(fAddInstituicao).subscribe(
+        res => {
+          console.log(res);
+          // this.instituicoesGestor.unshift(fAddInstituicao);
+          // console.log()
+        },
+        erro => {
+          console.log(erro);
+        }
+      );
+      // }
     } else {
       console.log('campos inválidos');
     }
@@ -224,7 +286,6 @@ export class GestorAddEditComponent implements OnInit {
 
 
   salvarPerfil(fAddPerfilNovo, salvarPerfil) {
-
     if (this.controleSelePerfilExistent) {
       this.formLocal = salvarPerfil;
     } else {
@@ -235,7 +296,6 @@ export class GestorAddEditComponent implements OnInit {
       if (this.controleSelePerfilExistent) {
         this.administracaoService.putInstituicao(this.formLocal.value, this.paramsById()).subscribe(
           res => {
-            console.log(res);
             this.perfilActive = true;
           },
           erro => {
@@ -245,7 +305,6 @@ export class GestorAddEditComponent implements OnInit {
       } else {
         this.administracaoService.postInstituicao(this.formLocal.value).subscribe(
           res => {
-            console.log(res);
             this.paramsByPost = res;
             this.perfilActive = true;
           },
@@ -297,12 +356,54 @@ export class GestorAddEditComponent implements OnInit {
     );
   }
 
+  getEmpresaById() {
+    if (this.paramsById()) {
+      this.administracaoService.getEmpresaId(this.paramsById()).subscribe(
+        res => {
+          this.gestor = res[0];
+        },
+        erro => {
+          console.log(erro);
+        }
+      );
+    }
+  }
+
   getGestorById() {
-    if (this.params.id || this.paramsByPost) {
+    if (this.paramsById()) {
       this.administracaoService.getGestorId(this.paramsById()).subscribe(
         res => {
           this.gestor = res[0];
-          console.log(res);
+        },
+        erro => {
+          console.log(erro);
+        }
+      );
+    }
+  }
+
+  getGestorEndereco() {
+    if (this.paramsById()) {
+      this.administracaoService.getEnderecoId(this.paramsById()).subscribe(
+        res => {
+          if (!!res[0]) {
+            this.endereco = res[0];
+            this.putPermitido = true;
+          }
+        },
+        erro => console.log(erro)
+      );
+    }
+  }
+
+  getContatoById() {
+    if (this.paramsById()) {
+      this.administracaoService.getContatoId(this.paramsById()).subscribe(
+        res => {
+          if (!!res[0]) {
+            this.contato = res[0];
+            this.putPermitido = true;
+          }
         },
         erro => {
           console.log(erro);
@@ -315,30 +416,32 @@ export class GestorAddEditComponent implements OnInit {
     this.administracaoService.getGestorInstituicao().subscribe(
       res => {
         this.gestorInstituicao = res;
-        console.log(res);
       },
       erro => console.log(erro)
     );
   }
 
-  getGestorEndereco() {
-    this.administracaoService.getEnderecoId(this.paramsById()).subscribe(
-      res => {
-        this.endereco = res[0];
-        console.log(!!res[0]);
-        if (!!res[0]) {
-          this.enderecoExistente = true;
+
+
+  getGestorInstituicaoById() {
+    if (this.paramsById()) {
+      this.administracaoService.getInstituicaoId(this.paramsById()).subscribe(
+        res => {
+          // this.instActive = true;
+          this.instituicoesGestor = res;
+        },
+        erro => {
+          console.log(erro);
         }
-      },
-      erro => console.log(erro)
-    );
+      );
+    }
   }
 
   getEstado() {
     this.administracaoService.getEstado().subscribe(
       res => {
-        this.estados = res,
-        console.log(res);
+        this.estados = res;
+        // this.selectMunicipio();
       },
       erro => console.log(erro)
     );
@@ -353,65 +456,190 @@ export class GestorAddEditComponent implements OnInit {
     );
   }
 
+  // ----- inicio Funções da aba instituições -----
+  getInstituicao() {
+    this.administracaoService.getSelecioneInt()
+      .subscribe(dados => {
+        this.instituicoesAbaInst = dados;
+        this.saveDados.getInstituicao = dados;
+      });
+  }
+
+  getTipoInst() {
+    this.administracaoService.getSelecioneTipoInt().subscribe(dados => {
+      this.tipoInstsAbaInst = dados;
+      this.saveDados.getTipoInst = dados;
+      console.log(this.tipoInstsAbaInst);
+    });
+  }
+
+  getBairros() {
+    this.administracaoService.getSelecioneBairro().subscribe(dados => {
+      this.municipios = dados;
+      this.bairrosAbaInst = dados;
+      this.tipoInstsAbaInst = dados;
+      this.instituicoesAbaInst = dados;
+    });
+  }
+
+  getUfs() {
+    this.administracaoService.getSelecioneEstado().subscribe(dados => {
+      this.ufsAbaInst = dados;
+      this.saveDados.getUfs = dados;
+    });
+  }
+
+  getMunicipio() {
+    this.administracaoService.getSelecioneMunicipios().subscribe(dados => {
+      this.municipiosAbaInst = dados;
+      this.saveDados.getMunicipio = dados;
+    });
+  }
+
+
+  atualizaUf(campo) {
+    this.resetarCampos();
+    if (campo) {
+      this.administracaoService.getAtualizaUf(campo.id_uf)
+        .subscribe(dados => {
+
+          this.municipios = dados;
+          this.bairrosAbaInst = dados;
+          this.tipoInstsAbaInst = dados;
+          this.instituicoesAbaInst = dados;
+        });
+    }
+  }
+
+  atualizaMunicipio(campo) {
+    if (campo) {
+      this.administracaoService.getAtualizaMunicipio(campo.id_municipio)
+        .subscribe(dados => {
+          // this.municipios = dados;
+          this.instituicoesAbaInst = dados;
+          this.tipoInstsAbaInst = dados;
+          this.bairrosAbaInst = dados;
+        });
+    }
+  }
+
+  atualizaBairro(campo) {
+    // erro
+    this.administracaoService.getAtualizaBairro(campo).subscribe(dados => {
+      // console.log(dados)
+      // if(dados.length != 0) {
+      //   this.instituicao.id_uf = dados[0].id_uf;
+      //   this.instituicao.id_municipio = dados[0].id_municipio;
+      //   this.instituicao.id_tipo_unidade = dados[0].id_tipo_unidade;
+      //   this.instituicao.idInstituicao_saude = dados[0].idInstituicao_saude;
+      //   this.instituicao.id_uf = dados[0].id_uf;
+      //   // this.instituicao.no_bairro = dados[0].no_bairro;
+      // }
+      //  this.bairros = dados;
+      this.municipios = dados;
+      this.tipoInstsAbaInst = dados;
+      this.instituicoesAbaInst = dados;
+    });
+  }
+
+  atualizaTipo(campo) {
+    if (campo) {
+      this.administracaoService.getAtualizaTipo(campo.id_tipo_unidade, campo.id_municipio)
+        .subscribe(dados => {
+          this.municipios = dados;
+          this.instituicoesAbaInst = dados;
+          this.tipoInstsAbaInst = dados;
+          this.bairrosAbaInst = dados;
+        });
+    }
+  }
+
+  atualizaInstituicao(campo) {
+    if (campo) {
+      this.administracaoService.getAtualizaInstituicao(campo.idInstituicao_saude)
+        .subscribe(dados => {
+          this.tipoInstsAbaInst = dados;
+          this.instituicao.id_municipio = dados[0].id_municipio;
+          this.instituicao.id_tipo_unidade = dados[0].id_tipo_unidade;
+          this.instituicao.idInstituicao_saude = dados[0].idInstituicao_saude;
+          this.instituicao.id_uf = dados[0].id_uf;
+          this.instituicao.no_bairro = dados[0].no_bairro;
+        });
+    }
+  }
+
+  resetarCampos() {
+    this.instituicao = {
+      id_uf: '',
+      id_municipio: '',
+      idInstituicao_saude: '',
+      id_tipo_unidade: '',
+      no_bairro: ''
+    };
+
+    this.instituicoesAbaInst = this.saveDados.getInstituicao;
+    this.tipoInstsAbaInst = this.saveDados.getTipoInst;
+    this.ufsAbaInst = this.saveDados.getUfs;
+    this.municipios = this.saveDados.getMunicipio;
+  }
+
+
+  getAbaInstituicoes() {
+    this.getInstituicao();
+    this.getTipoInst();
+    this.getUfs();
+    this.getMunicipio();
+    this.getBairros();
+  }
+
+  correcaoInstituicao() {
+
+    delete this.tipoInstsAbaInst[0].id_municipio;
+    delete this.tipoInstsAbaInst[0].id_uf;
+    delete this.tipoInstsAbaInst[0].idInstituicao_saude;
+    return this.tipoInstsAbaInst[0];
+  }
+
+  // ----- Fim Funções da aba instituições -----
+
+
+
 
   paramsById() {
     if (this.params.id) {
       return this.params.id;
-    } else if (this.paramsByPost.cpf) {
+    } else if (this.paramsByPost) {
       return this.paramsByPost.cpf;
     }
   }
 
-
-  backGestor() {
-    if (this.paramsById()) {
-      this.getGestorById();
-      this.router.navigate([`admin/edit/${this.paramsById()}`]);
-      this.gestorActive = true;
-    }
+  // funções para retornar para página antrior e fazer get
+  backEmpresa() {
+    this.getEmpresaById();
+    this.router.navigate([`admin/edit/${this.paramsById()}`]);
   }
 
-
+  backGestor() {
+    this.getGestorById();
+    this.router.navigate([`admin/edit/${this.paramsById()}`]);
+  }
 
   backEndereco() {
-    console.log("quero voltar")
-    if (this.paramsById()) {
-      this.getGestorEndereco();
-      this.router.navigate([`admin/edit/${this.paramsById()}`]);
-      this.enderecoActive = true;
-    }
+    this.getGestorEndereco();
+    this.router.navigate([`admin/edit/${this.paramsById()}`]);
   }
 
   backContato() {
-    if (this.paramsById()) {
-      this.administracaoService.getContatoId(this.paramsById()).subscribe(
-        res => {
-          console.log(res);
-          this.contatoActive = true;
-        },
-        erro => {
-          console.log(erro);
-        }
-      );
-    }
+    this.getContatoById();
+    this.router.navigate([`admin/edit/${this.paramsById()}`]);
   }
 
   backInstituicao() {
-    if (this.paramsById()) {
-      this.administracaoService.getInstituicaoId(this.paramsById()).subscribe(
-        res => {
-          console.log(res);
-          this.instActive = true;
-        },
-        erro => {
-          console.log(erro);
-        }
-      );
-    }
+    this.getGestorInstituicaoById();
+    this.router.navigate([`admin/edit/${this.paramsById()}`]);
   }
 
-
-  cancelarGestor() {
+  cancelarEmpresa() {
     this.router.navigate(['/admin']);
   }
 
@@ -426,7 +654,5 @@ export class GestorAddEditComponent implements OnInit {
   ngOnInit() {
     this.getGestorInstituicao();
     this.activatedRoute.params.subscribe(res => (this.params = res));
-    this.getGestorById();
-    this.getEstado();
   }
 }
