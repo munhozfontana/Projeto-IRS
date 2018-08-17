@@ -1,5 +1,33 @@
 module.exports = function (application) {
 
+    // ------------------ ROTAS DE GENÉRICAS ---------------
+
+    application.get('/municipios', function (req, res) {
+        application.app.controllers.gestores.municipios(application, req, res);
+    });
+    
+    
+    
+    // ------------------ ROTAS DE EMPRESA ---------------
+    
+    
+    application.post('/empresa', function (req, res) {
+        application.app.controllers.gestores.cadastrarEmpresa(application, req, res);
+    });
+
+    // getEmpresaId(cnpj) {
+    //     return this.http
+    //       .get(`${ROTAS_API}empresa/${cnpj}`);
+    //   }
+    //   putEmpresa(empresa, id) {
+    //     return this.http
+    //       .put(`${ROTAS_API}empresa/${id}`, empresa);
+    //   }
+    //   postEmpresa(empresa) {
+    //     return this.http
+    //       .post(`${ROTAS_API}empresa`, empresa);
+    //   }
+
 
     // ------------------ ROTAS DE GESTOR ---------------
     application.get('/gestores', function (req, res) {
@@ -37,24 +65,24 @@ module.exports = function (application) {
         application.app.controllers.gestores.estados(application, req, res);
     });
 
-    application.get('/municipios/:id_uf', function (req, res) {
-        application.app.controllers.gestores.municipios(application, req, res);
-    });
+    // application.get('/municipios/:id_uf', function (req, res) {
+    //     application.app.controllers.gestores.municipios(application, req, res);
+    // });
 
 
     // ROTAS DE ENDERECO
     application.get('/endereco/:cpf', function (req, res) {
         application.app.controllers.gestores.endereco(application, req, res);
     });
-    
+
     application.post('/endereco', function (req, res) {
         application.app.controllers.gestores.novoEndereco(application, req, res);
     });
-    
+
     application.put('/endereco/:cpf', function (req, res) {
         application.app.controllers.gestores.atualizaEndereco(application, req, res);
     });
-    
+
 
     // ROTAS DO CONTATO DO GESTOR
     application.get('/contato/:cpf', function (req, res) {
@@ -66,4 +94,10 @@ module.exports = function (application) {
     application.put('/contato/:cpf', function (req, res) {
         application.app.controllers.gestores.atualizaContato(application, req, res);
     });
+
+
+    application.post('/instituicao', function (req, res) {
+        application.app.controllers.gestores.cadastrarInstituicao(application, req, res);
+    });
+
 }
