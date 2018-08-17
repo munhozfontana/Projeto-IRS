@@ -216,7 +216,7 @@
                   <label>Estado</label>
                   <select class="ui dropdown" [(ngModel)]="endereco.uf" name="uf" (change)="selectMunicipio(endereco.uf)" required>
                     <option value="">Selecione Estado</option>
-                    <option *ngFor="let uf of estados" value="{{uf.id_uf}}">{{uf.uf_sigla}}</option>
+                    <option *ngFor="let municipio of municipios" value="{{municipio.descricao}}">{{municipio.descricao}}</option>
                   </select>
                 </div>
 
@@ -224,7 +224,7 @@
                   <label>Município</label>
                   <select class="ui dropdown" name="municipio" [(ngModel)]="endereco.municipio" required #municipio>
                     <option value="">Selecione Município</option>
-                    <option *ngFor="let municipio of municipios" value="{{municipio.id_municipio}}">{{municipio.no_mun_completo}}</option>
+                    <option *ngFor="let municipio of municipios" value="{{municipio.descricao}}">{{municipio.descricao}}</option>
                   </select>
                 </div>
 
@@ -237,7 +237,7 @@
                   <i class="angle double left icon"></i>Voltar</button>
               </div>
               <div class="column">
-                <button class="ui right labeled icon button right floated" (click)="contatoActive = true; salvarEndereco(fAddEndereco)">
+                <button class="ui right labeled icon button right floated" (click)="salvarEndereco(fAddEndereco)">
                   <i class="angle double right icon"></i>Próximo</button>
               </div>
             </div>
@@ -267,17 +267,23 @@
 
                 <div class="three wide field">
                   <label for="Telefone">Telefone 1</label>
-                  <input id="numero" type="tel" class="validate" name="telefone" [(ngModel)]="contato.telefone" required>
+                  <input id="numero" type="tel" class="validate" name="telefone" [(ngModel)]="contato.telefone" >
                 </div>
 
                 <div class="three wide field">
-                  <label for="telefone">Telefone 2</label>
-                  <input id="bairro" type="text" class="validate" name="telefone2" [(ngModel)]="contato.telefone2" required>
+                  <label for="tipo">tipo de telefone</label>
+                  <select class="ui dropdown" [(ngModel)]="contato.tipo" name="tipo" >
+                    <option value="fixo">Fixo</option>
+                    <option value="movel">Movel</option>
+                  
+                  </select>
                 </div>
+
+           
 
 
                 <div class="three wide field">
-                  <button class="ui google plus labeled icon button" (click)="salvarInstituicao(fAddInstituicao)">
+                  <button class="ui google plus labeled icon button" (click)="salvarContato(fAddContato)">
                     <i class="plus icon"></i>
                     Adicionar Contato
                   </button>
@@ -348,7 +354,7 @@
                   <i class="angle double left icon"></i>Voltar</button>
               </div>
               <div class="column">
-                <button class="ui right labeled icon button right floated" (click)="instActive = true; salvarContato(fAddContato)">
+                <button class="ui right labeled icon button right floated" (click)="instActive = true;">
                   <i class="angle double right icon"></i>Próximo</button>
               </div>
             </div>

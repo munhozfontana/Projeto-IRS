@@ -35,14 +35,6 @@ module.exports.cadastrarEmpresa = function (application, req, res) {
 
 
 
-
-
-
-
-
-
-
-
 //Controle de gestores, retorna todos os gestores
 module.exports.gestores = function (application, req, res) {
 
