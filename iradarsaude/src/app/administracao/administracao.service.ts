@@ -10,8 +10,16 @@ export class AdministracaoService {
     public http: HttpClient
   ) { }
 
+  // requisições HTTP geréricas
+  getMunicipios() {
+    return this.http
+      .get(`${ROTAS_API}municipios`);
+  }
 
   // requisições HTTP Empresa
+
+
+
   getEmpresaId(cnpj) {
     return this.http
       .get(`${ROTAS_API}empresa/${cnpj}`);
@@ -131,11 +139,6 @@ export class AdministracaoService {
       .get(`${ROTAS_API}estados`);
   }
 
-  getMunicipios(id_uf) {
-    return this.http
-      .get(`${ROTAS_API}municipios/${id_uf}`);
-  }
-
 
 
   // requisicoes HTTP do banco postgres, para a aba instituicoes do gestor
@@ -152,7 +155,7 @@ export class AdministracaoService {
   */
   getSelecioneMunicipios() {
     return this.http
-      .get(`${ROTAS_API}instituicaoSaude/municipios`);
+      .get(`${ROTAS_API}municipios`);
   }
 
   //   /*
