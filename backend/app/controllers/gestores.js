@@ -32,11 +32,10 @@ module.exports.cadastrarEmpresa = function (application, req, res) {
 }
 
 
-
-
-
 //Controle de gestores, retorna todos os gestores
 module.exports.gestores = function (application, req, res) {
+
+
 
     var conexaoPool = application.config.conexaoBD();
     var model = new application.app.models.gestoresDAO(conexaoPool);
@@ -50,6 +49,8 @@ module.exports.gestores = function (application, req, res) {
         res.status(200).send(result);
     });
 }
+
+
 
 //Controle de gestores, retorna os dados do gestor de acordo com id
 module.exports.gestor = function (application, req, res) {

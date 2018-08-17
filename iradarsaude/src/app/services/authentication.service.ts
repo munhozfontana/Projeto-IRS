@@ -18,8 +18,8 @@ export class AuthenticationService {
             .map(res => {
               if (res.token) {
                 localStorage.setItem('currentUser', res.token);
-                localStorage.setItem('currentCode', res.cod_usuario_cript);
-                localStorage.setItem('currentUserCode', res.cod_usuario);
+                // localStorage.setItem('currentCode', res.cod_usuario_cript);
+                // localStorage.setItem('currentUserCode', res.cod_usuario);
               }
               this.emitirUsuario.emit(res);
             });

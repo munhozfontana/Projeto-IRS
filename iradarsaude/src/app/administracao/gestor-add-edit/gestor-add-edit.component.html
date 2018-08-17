@@ -63,20 +63,21 @@
               <div class="fields">
 
                 <div class="eight wide field">
-                  <label>Município</label>
-                  <select class="ui dropdown" name="idibge" [(ngModel)]="empresa.idibge" required>
-                    <option value="">Selecione Município</option>
-                    <option *ngFor="let municipio of municipios" value="{{municipio.idibge}}">{{municipio.descricao}}</option>
+                  <label>Estado</label>
+                  <select class="ui dropdown" name="estado" ngModel (ngModelChange)="selectUfLocal($event)" >
+                    <option value="">Selecione Estado</option>
+                    <option *ngFor="let uf of ufsLocal" value="{{uf.uf}}">{{uf.uf}}</option>
                   </select>
                 </div>
 
                 <div class="eight wide field">
-                  <label>Bairro</label>
-                  <select class="ui dropdown" name="bairro" [(ngModel)]="empresa.bairro">
+                  <label>Município</label>
+                  <select class="ui dropdown" name="idibge"  [(ngModel)]="empresa.idibge" required>
                     <option value="">Selecione Município</option>
-                    <!-- <option *ngFor="let municipio of municipios" value="{{municipio.id_municipio}}">{{municipio.no_mun_completo}}</option> -->
+                    <option *ngFor="let municipio of municipiosLocal" value="{{municipio.idibge}}">{{municipio.descricao}}</option>
                   </select>
                 </div>
+
                 <div class="eight wide field">
                   <label>CEP</label>
                   <input class="ui dropdown" name="cep" [(ngModel)]="empresa.cep">

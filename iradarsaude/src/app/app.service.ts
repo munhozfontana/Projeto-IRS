@@ -5,31 +5,54 @@ import { ROTAS_API } from './app.api';
 @Injectable()
 export class AppService {
 
-  municipios: any; 
-  ufs: any;
+  municipiosIQS: any;
+  ufsIQS: any;
+
+  municipiosLocal: any;
+  ufsLocal: any;
 
   constructor(
     private http: HttpClient
-  ) { 
+  ) {
     this.http.get(`${ROTAS_API}instituicaoSaude/municipios`)
     .subscribe(
-      res => this.municipios = res
+      res => this.municipiosIQS = res
     );
     this.http.get(`${ROTAS_API}instituicaoSaude/estados`)
     .subscribe(
       res => {
-        console.log(res);
-        this.ufs = res;
+        this.ufsIQS = res;
+      }
+    );
+    this.http.get(`${ROTAS_API}municipios`)
+    .subscribe(
+      res => this.municipiosLocal = res
+    );
+    this.http.get(`${ROTAS_API}ufs`)
+    .subscribe(
+      res => {
+        this.ufsLocal = res;
       }
     );
   }
 
-  getUfs() {
-    return this.ufs;
+  getUfsIQS() {
+    return this.ufsIQS;
   }
 
-  getMunicipios(codUf) {
-    return this.municipios.filter(e => e.id_uf === codUf);
+  getMunicipiosIQS(codUf) {
+    return this.municipiosIQS.filter(e => e.id_uf === codUf);
   }
+
+
+  getUfsLocal() {
+    return this.ufsLocal;
+  }
+
+  getMunicipiosLocal(uf) {
+    console.log(uf)
+    return this.municipiosLocal.filter(e => e.uf === uf);
+  }
+
 
 }

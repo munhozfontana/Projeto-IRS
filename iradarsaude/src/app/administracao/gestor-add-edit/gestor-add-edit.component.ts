@@ -11,6 +11,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class GestorAddEditComponent implements OnInit {
 
+  municipiosLocal: any;
+  ufsLocal: any;
   controleSelePerfilExistent = false;
   controleCriarNovoPerfil = false;
   BotoesPrincipais = true;
@@ -34,7 +36,8 @@ export class GestorAddEditComponent implements OnInit {
     complemento: '',
     numero: '',
     cep: '',
-    idibge: ''
+    idibge: '',
+    bairro: ''
   };
 
 
@@ -138,6 +141,9 @@ export class GestorAddEditComponent implements OnInit {
     }
   }
 
+  // -----------    ABA EMPRESA ------------------
+
+
   // função para Salvar os dados da empresa do gestor
   salvarEmpresa(fAddEmpresa) {
     if (fAddEmpresa.status !== 'INVALID') {
@@ -169,6 +175,41 @@ export class GestorAddEditComponent implements OnInit {
       console.log('campos inválidos');
     }
   }
+
+  getEstadoLocal() {
+
+  }
+
+  // getEmpresaById() {
+  //   if (this.paramsById()) {
+  //     this.administracaoService.getEmpresaId(this.paramsById()).subscribe(
+  //       res => {
+  //         this.gestor = res[0];
+  //       },
+  //       erro => {
+  //         console.log(erro);
+  //       }
+  //     );
+  //   }
+  // }
+
+  // funções para retornar para página antrior e fazer get
+  // backEmpresa() {
+  //   this.getEmpresaById();
+  //   this.router.navigate([`admin/edit/${this.paramsById()}`]);
+  // }
+
+
+  cancelarEmpresa() {
+    this.router.navigate(['/admin']);
+  }
+
+ // -----------  FIM  ABA EMPRESA ------------------
+
+
+
+
+ // -----------   ABA GESTOR ------------------
 
   // função para Salvar os dados básicos gestor
   salvarGestor(fAddGestor) {
@@ -202,6 +243,8 @@ export class GestorAddEditComponent implements OnInit {
       console.log('campos inválidos');
     }
   }
+ // -----------  FIM  ABA GESTOR ------------------
+
 
   // função para Salvar os endereço do gestor
   salvarEndereco(fAddEndereco) {
@@ -371,18 +414,7 @@ export class GestorAddEditComponent implements OnInit {
   //   );
   // }
 
-  // getEmpresaById() {
-  //   if (this.paramsById()) {
-  //     this.administracaoService.getEmpresaId(this.paramsById()).subscribe(
-  //       res => {
-  //         this.gestor = res[0];
-  //       },
-  //       erro => {
-  //         console.log(erro);
-  //       }
-  //     );
-  //   }
-  // }
+
 
   // getGestorById() {
   //   if (this.paramsById()) {
@@ -490,7 +522,6 @@ export class GestorAddEditComponent implements OnInit {
   }
 
   getBairros(idMunicipio) {
-    console.log(idMunicipio)
     this.administracaoService.getSelecioneBairro(idMunicipio).subscribe(dados => {
       console.log(dados);
       this.bairros = dados;
@@ -501,11 +532,21 @@ export class GestorAddEditComponent implements OnInit {
   }
 
   getUfs() {
-    this.ufs = this.appService.getUfs();
+    this.ufs = this.appService.getUfsIQS();
+  }
+
+  getUfsLocal() {
+    this.ufsLocal = this.appService.getUfsLocal();
+    console.log(this.ufsLocal);
   }
 
   selectUf(codUf) {
-    this.municipios = this.appService.getMunicipios(codUf);
+    this.municipios = this.appService.getMunicipiosIQS(codUf);
+  }
+
+  selectUfLocal(codUf) {
+    console.log(codUf)
+    this.municipiosLocal = this.appService.getMunicipiosLocal(codUf);
   }
 
   getMunicipio() {
@@ -519,7 +560,7 @@ export class GestorAddEditComponent implements OnInit {
     this.administracaoService.getSelecioneInt(form.municipio, form.bairro, form.tipInst)
     .subscribe(
       res => this.instsSau = res
-    )
+    );
   }
 
 
@@ -639,11 +680,7 @@ export class GestorAddEditComponent implements OnInit {
     }
   }
 
-  // funções para retornar para página antrior e fazer get
-  // backEmpresa() {
-  //   this.getEmpresaById();
-  //   this.router.navigate([`admin/edit/${this.paramsById()}`]);
-  // }
+
 
   // backGestor() {
   //   this.getGestorById();
@@ -665,9 +702,7 @@ export class GestorAddEditComponent implements OnInit {
   //   this.router.navigate([`admin/edit/${this.paramsById()}`]);
   // }
 
-  cancelarEmpresa() {
-    this.router.navigate(['/admin']);
-  }
+
 
   VoltarBotoesPrin() {
     this.BotoesPrincipais = true;
@@ -683,9 +718,10 @@ export class GestorAddEditComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      //this.getGestorInstituicao();
+      // this.getGestorInstituicao();
       this.activatedRoute.params.subscribe(res => (this.params = res));
       this.getUfs();
+      this.getUfsLocal();
       this.getTipoInst();
     }, 1000);
   }

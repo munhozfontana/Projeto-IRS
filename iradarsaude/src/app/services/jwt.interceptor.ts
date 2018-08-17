@@ -21,8 +21,8 @@ export class JwtInterceptor implements HttpInterceptor {
         request = request.clone({
             setHeaders: {
             'x-access-token': currentUser,
-            'cod_usuario': currentUserCode,
-            'cod_usuario_cript': currentCode
+            // 'cod_usuario': currentUserCode,
+            // 'cod_usuario_cript': currentCode
           }
         });
       }
