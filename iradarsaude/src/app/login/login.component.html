@@ -15,12 +15,12 @@
             </div>
           </h2>
 
-          <form class="ui large form segment stacked secondary">
+          <form class="ui large form segment stacked secondary" #fLogin="ngForm" (ngSubmit)="fazerLogin(fLogin)">
             <!-- campo 1 -->
             <div class="field">
               <div class="ui right action left icon input">
                 <i class="user icon"></i>
-                <input type="text" placeholder="Login">
+                <input type="text" placeholder="Login" name="login" ngModel required>
               </div>
             </div>
 
@@ -30,14 +30,12 @@
             <div class="field">
               <div class="ui right action left icon input">
                 <i class="lock icon"></i>
-                <input type="password" placeholder="Senha">
+                <input type="password" placeholder="Senha" name="senha" ngModel required>
               </div>
             </div>
 
             <!-- Botão de logar -->
-            <button [routerLink]="['/']" class="ui google plus button">
-              Login
-            </button>
+            <input class="ui google plus button" type="submit" value="Entrar">
 
           </form>
         </div>

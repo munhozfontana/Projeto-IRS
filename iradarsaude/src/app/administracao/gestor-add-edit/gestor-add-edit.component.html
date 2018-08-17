@@ -320,13 +320,13 @@
                   <td class="ui center aligned collapsing">
                     <!-- <a class="ui icon button circular" [routerLink]="['']" suiPopup popupHeader="Visualizar" popupInverted="true">
                         <i class="search icon"></i>
-                      </a> -->
+                      </a> 
                     <a class="mini ui icon button circular" [routerLink]="['edit', gestor.cpf]" suiPopup popupHeader="Editar" popupInverted="true">
                       <i class="pencil alternate icon"></i>
                     </a>
                     <a class="mini ui icon button circular" (click)="removerGestor(gestor.cpf, i)" suiPopup popupHeader="Remover" popupInverted="true">
                       <i class="trash alternate icon"></i>
-                    </a>
+                    </a>-->
                   </td>
                 </tr>
 
@@ -366,31 +366,31 @@
         <!--incio da aba Instituições-->
           <!--incio da aba Instituições-->
           <div class="ui bottom attached segment" suiTabContent="4">
-            <form class="ui form" #fAddInstituicao="ngForm" >
+            <form class="ui form" #fAddInstituicao="ngForm" (ngSubmit)="adicionarInstituicao(fAddInstituicao)" >
               <div class="field">
                 <div class="fields">
   
                   <div class="four wide field">
                     <label>Estado</label>
-                    <select class="ui dropdown" name="uf"  [(ngModel)]="instituicao.uf" #uf>
+                    <select class="ui dropdown" name="uf"  [(ngModel)]="instituicao.uf" (ngModelChange)="selectUf($event)" #uf required>
                       <option value="">Selecione Estado</option>
-                      <option *ngFor="let uf of ufs" value="{{uf.uf}}">{{uf.uf}}</option>
+                      <option *ngFor="let uf of ufs" value="{{uf.id_uf}}">{{uf.no_uf_completo}}</option>
                     </select>
                   </div>
   
                   <div class="six wide field">
                     <label>Municipio</label>
-                    <select class="ui dropdown" name="municipio" [(ngModel)]="instituicao.municipio" #municipio>
+                    <select class="ui dropdown" name="municipio" [(ngModel)]="instituicao.municipio" (ngModelChange)="getBairros($event)" #municipio required>
                       <option value="">Selecione municipio</option>
-                      <option *ngFor="let municipio of municipios" value="{{municipio.municipio}}">{{municipio.municipio}}</option>
+                      <option *ngFor="let municipio of municipios" value="{{municipio.id_municipio}}">{{municipio.no_mun_completo}}</option>
                     </select>
                   </div>
   
                   <div class="six wide field">
                     <label>Bairro</label>
-                    <select class="ui dropdown" name="bairro" [(ngModel)]="instituicao.bairro" #bairro>
+                    <select class="ui dropdown" name="bairro" [(ngModel)]="instituicao.bairro" #bairro required>
                       <option value="">Selecione Bairro</option>
-                      <option *ngFor="let bairro of bairros" value="{{bairro.bairro}}">{{instituicao.nome}}</option>
+                      <option *ngFor="let bairro of bairros" value="{{bairro.no_bairro}}">{{bairro.no_bairro}}</option>
                     </select>
                   </div>
   
@@ -402,22 +402,22 @@
   
                   <div class="four wide field">
                     <label>Tipo de Instituição</label>
-                    <select class="ui dropdown" name="tipInst" [(ngModel)]="instituicao.tipInst" #tipInst>
+                    <select class="ui dropdown" name="tipInst" [(ngModel)]="instituicao.tipInst" (ngModelChange)="getInsts(instituicao)" #tipInst required>
                       <option value="">Selecione</option>
-                      <option *ngFor="let tipInst of tipInsts" value="{{tipInst.tipInst}}">{{tipInst.tipInst}}</option>
+                      <option *ngFor="let tipInst of tipInsts" value="{{tipInst.id_tipo_unidade}}">{{tipInst.ds_tipo_unidade}}</option>
                     </select>
                   </div>
   
                   <div class="eight wide field">
                     <label>Instituição de Saúde</label>
-                    <select class="ui dropdown" name="idInstituicao_saude" [(ngModel)]="instituicao.idInstituicao_saude" #instSau>
+                    <select class="ui dropdown" name="idInstituicao_saude" [(ngModel)]="instituicao.idInstituicao_saude" #instSau required>
                       <option value="">Selecione</option>
-                      <option *ngFor="let instSau of instsSau" value="{{instSau.idInstituicao_saude}}">{{instSau.instSau}}</option>
+                      <option *ngFor="let instSau of instsSau" value="{{instSau.id_unidade}}">{{instSau.no_fantasia}}</option>
                     </select>
                   </div>
   
                   <div class="four wide field">
-                    <button class="ui google plus labeled icon button">
+                    <button class="ui google plus labeled icon button" [disabled]="fAddInstituicao.invalid">
                       <i class="plus icon"></i>
                       Adicionar Instituição
                     </button>

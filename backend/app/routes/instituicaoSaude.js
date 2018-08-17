@@ -10,10 +10,10 @@ module.exports = function (application) {
     application.get('/instituicaoSaude/tipoInstituicao', function (req, res) {
         application.app.controllers.instituicaoSaude.tipoInstituicao(application, req, res);
     });
-    application.get('/instituicaoSaude/instituicao', function (req, res) {
+    application.get('/instituicaoSaude/instituicao/:municipio/:bairro/:tipo', function (req, res) {
         application.app.controllers.instituicaoSaude.instituicao(application, req, res);
     });
-    application.get('/instituicaoSaude/bairros', function (req, res) {
+    application.get('/instituicaoSaude/bairros/:id', function (req, res) {
         application.app.controllers.instituicaoSaude.bairros(application, req, res);
     });
 

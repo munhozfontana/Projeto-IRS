@@ -161,9 +161,9 @@ export class AdministracaoService {
   //   /*
   //   * Protocolo HTTP
   //   */
-  getSelecioneBairro() {
+  getSelecioneBairro(idMunicipio) {
     return this.http
-      .get(`${ROTAS_API}instituicaoSaude/bairros`);
+      .get(`${ROTAS_API}instituicaoSaude/bairros/${idMunicipio}`);
   }
 
   /*
@@ -178,9 +178,9 @@ export class AdministracaoService {
   * Protocolo HTTP
   */
 
-  getSelecioneInt() {
+  getSelecioneInt(municipio, bairro, tipo) {
     return this.http
-      .get(`${ROTAS_API}instituicaoSaude/instituicao`);
+      .get(`${ROTAS_API}instituicaoSaude/instituicao/${municipio}/${bairro}/${tipo}`);
   }
 
   /*
