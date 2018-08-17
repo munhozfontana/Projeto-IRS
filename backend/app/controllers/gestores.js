@@ -1,3 +1,48 @@
+//--------------- ABA EMPRESA ------------------
+module.exports.municipios = function (application, req, res) {
+
+    var conexaoPool = application.config.conexaoBD();
+    var model = new application.app.models.gestoresDAO(conexaoPool);
+
+    model.listaMunicipios(function (error, result) {
+
+        if (error) {
+            console.log(error);
+            res.status(400).send(error);
+        }
+        res.status(200).send(result);
+    });
+}
+
+module.exports.cadastrarEmpresa = function (application, req, res) {
+
+    empresa = req.body
+
+    var conexaoPool = application.config.conexaoBD();
+    var model = new application.app.models.gestoresDAO(conexaoPool);
+
+    model.cadastrarEmpresa(empresa ,function (error, result) {
+
+        if (error) {
+            console.log(error);
+            res.status(400).send(error);
+        }
+        res.status(200).send(result);
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Controle de gestores, retorna todos os gestores
 module.exports.gestores = function (application, req, res) {
 
@@ -123,22 +168,22 @@ module.exports.estados = function (application, req, res) {
 
 
 
-module.exports.municipios = function (application, req, res) {
+// module.exports.municipios = function (application, req, res) {
 
-    var params = req.params;
+//     var params = req.params;
 
-    var conexaoPool = application.config.dbConnection();
-    var model = new application.app.models.gestoresDAO(conexaoPool);
+//     var conexaoPool = application.config.dbConnection();
+//     var model = new application.app.models.gestoresDAO(conexaoPool);
 
-    model.listarMunicipios(params, function (error, result) {
+//     model.listarMunicipios(params, function (error, result) {
 
-        if (error) {
-            console.log(error);
-            res.status(400).send(error);
-        }
-        res.status(200).send(result.rows);
-    });
-}
+//         if (error) {
+//             console.log(error);
+//             res.status(400).send(error);
+//         }
+//         res.status(200).send(result.rows);
+//     });
+// }
 
 module.exports.endereco = function (application, req, res) {
 
@@ -222,7 +267,7 @@ module.exports.cadastrarContato = function (application, req, res) {
             console.log(error);
             res.status(400).send(error);
         }
-        res.status(200).send({ cpf : contato.cpf });
+        res.status(200).send({ cpf: contato.cpf });
     });
 }
 
@@ -243,7 +288,39 @@ module.exports.atualizaContato = function (application, req, res) {
         res.status(200).send(result);
     });
 }
+module.exports.cadastrarInstituicao = function (application, req, res) {
 
+    var instituicao = req.body;
+
+    var conexaoMySQL = application.config.conexaoBD();
+    var model = new application.app.models.gestoresDAO(conexaoMySQL);
+
+    model.verificaIdTipoInstituicao(instituicao, function (error, resultTipoInst) {
+
+        if (error) {
+            console.log(error);
+            res.status(400).send(error);
+        }
+        if (resultTipoInst[0]) {
+            model.cadastrarInstituicao(instituicao, resultTipoInst[0], function (error, existente) {
+                if (error) {
+                    console.log(error);
+                    res.status(400).send(error);
+                }
+                res.status(200).send(existente);
+            });
+           
+        } else {
+            model.cadastrarInstituicao(instituicao, !resultTipoInst[0], function (error, result) {
+                if (error) {
+                    console.log(error);
+                    res.status(400).send(error);
+                }
+                res.status(200).send(result);
+            });
+        }
+    });
+}
 
 
 

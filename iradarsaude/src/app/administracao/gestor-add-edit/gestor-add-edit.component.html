@@ -63,20 +63,25 @@
               <div class="fields">
 
                 <div class="eight wide field">
+                  <label>Município</label>
+                  <select class="ui dropdown" name="idibge" [(ngModel)]="empresa.idibge" required>
+                    <option value="">Selecione Município</option>
+                    <option *ngFor="let municipio of municipios" value="{{municipio.idibge}}">{{municipio.descricao}}</option>
+                  </select>
+                </div>
+
+                <div class="eight wide field">
                   <label>Bairro</label>
                   <select class="ui dropdown" name="bairro" [(ngModel)]="empresa.bairro">
                     <option value="">Selecione Município</option>
                     <!-- <option *ngFor="let municipio of municipios" value="{{municipio.id_municipio}}">{{municipio.no_mun_completo}}</option> -->
                   </select>
                 </div>
-
                 <div class="eight wide field">
-                  <label>Município</label>
-                  <select class="ui dropdown" name="municipio" [(ngModel)]="empresa.municipio">
-                    <option value="">Selecione Município</option>
-                    <!-- <option *ngFor="let municipio of municipios" value="{{municipio.id_municipio}}">{{municipio.no_mun_completo}}</option> -->
-                  </select>
+                  <label>CEP</label>
+                  <input class="ui dropdown" name="cep" [(ngModel)]="empresa.cep">
                 </div>
+
 
               </div>
             </div>
@@ -90,7 +95,7 @@
                 <button class="ui left labeled icon button left floated btn-color" (click)="cancelarEmpresa(fAddEmpresa)">
                   <i class="angle double left icon"></i> Cancelar
                 </button>
-                <button class="ui right labeled icon button right floated btn-color" (click)="gestorActive = true ;salvarEmpresa(fAddEmpresa)">
+                <button class="ui right labeled icon button right floated btn-color" (click)="salvarEmpresa(fAddEmpresa)">
                   <i class="angle double right icon"></i> Próximo
                 </button>
               </div>
@@ -158,7 +163,7 @@
                 <button class="ui left labeled icon button left floated btn-color" (click)="empresaActive = true; backEmpresa(fAddGestor)">
                   <i class="angle double left icon"></i> Voltar
                 </button>
-                <button class="ui right labeled icon button right floated btn-color" (click)="enderecoActive = true; salvarGestor(fAddGestor)">
+                <button class="ui right labeled icon button right floated btn-color" (click)="salvarGestor(fAddGestor)">
                   <i class="angle double right icon"></i> Próximo
                 </button>
               </div>
