@@ -25,7 +25,7 @@ module.exports.municipio = function (application, req, res) {
             console.log(error);
             res.status(400).send(error);
         }
-
+        console.log(result);
         res.status(200).json(result.rows);
     });
 }
@@ -58,6 +58,7 @@ module.exports.tipoInstituicao = function (application, req, res) {
             console.log(error);
             res.status(400).send(error);
         }
+        console.log(result);
         res.status(200).json(result.rows);
     });
 }

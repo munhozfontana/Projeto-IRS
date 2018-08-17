@@ -4,7 +4,7 @@ function InstituicaoSaudeDAO(connection) {
 
 
 InstituicaoSaudeDAO.prototype.getEstado = function (callback) {
-    this._connection.query("SELECT id_uf, no_uf_completo FROM dbgeral.tb_uf WHERE uf_status = 'ATIVO' order by no_uf_completo;", callback);
+    this._connection.query("SELECT id_uf, uf_sigla, no_uf_completo FROM dbgeral.tb_uf WHERE uf_status = 'ATIVO' order by no_uf_completo;", callback);
 }
 
 InstituicaoSaudeDAO.prototype.getMunicipios = function (callback) {

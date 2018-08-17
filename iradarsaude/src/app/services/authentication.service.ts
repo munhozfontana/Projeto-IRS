@@ -14,12 +14,14 @@ export class AuthenticationService {
     ) { }
 
     login(user) {
+      console.log(user);
         return this.http.post<any>(`http://localhost:8080/autentica`, user)
             .map(res => {
-              if (res.token) {
-                localStorage.setItem('currentUser', res.token);
-                localStorage.setItem('currentCode', res.cod_usuario_cript);
-                localStorage.setItem('currentUserCode', res.cod_usuario);
+              console.log(res);
+              if (res) {
+                localStorage.setItem('currentUser', res);
+                // localStorage.setItem('currentCode', res.cod_usuario_cript);
+                // localStorage.setItem('currentUserCode', res.cod_usuario);
               }
               this.emitirUsuario.emit(res);
             });
