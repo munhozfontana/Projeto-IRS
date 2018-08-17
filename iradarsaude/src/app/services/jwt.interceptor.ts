@@ -14,15 +14,15 @@ export class JwtInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         const currentUser = this.authenticationService.getToken();
-        const currentUserCode = this.authenticationService.getUserCode();
-        const currentCode = this.authenticationService.getCode();
+        // const currentUserCode = this.authenticationService.getUserCode();
+        // const currentCode = this.authenticationService.getCode();
 
         if (currentUser) {
         request = request.clone({
             setHeaders: {
             'x-access-token': currentUser,
-            'cod_usuario': currentUserCode,
-            'cod_usuario_cript': currentCode
+            // 'cod_usuario': currentUserCode,
+            // 'cod_usuario_cript': currentCode
           }
         });
       }
