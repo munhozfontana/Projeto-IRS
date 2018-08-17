@@ -59,8 +59,8 @@ export class GestorAddEditComponent implements OnInit {
   // declarações da aba Contato
   contato = {
     email: '',
-    tel1: '',
-    tel2: ''
+    telefone: '',
+    tipo: ''
   };
 
   // declarações da aba instituições
@@ -109,6 +109,7 @@ export class GestorAddEditComponent implements OnInit {
 
   municipiosAbaInst: any;
   cnpj: any;
+  cpf: any;
   constructor(
     private administracaoService: AdministracaoService,
     private activatedRoute: ActivatedRoute,
@@ -165,6 +166,7 @@ export class GestorAddEditComponent implements OnInit {
   // função para Salvar os dados básicos gestor
   salvarGestor(fAddGestor) {
     if (fAddGestor.status !== 'INVALID') {
+      this.cpf = fAddGestor.cpf;
       if (this.params.id) {
         this.administracaoService.putGestor(fAddGestor.value, this.params.id).subscribe(
           res => {
@@ -176,7 +178,7 @@ export class GestorAddEditComponent implements OnInit {
           }
         );
       } else {
-        fAddGestor.value.cnpj = this.cnpj
+        fAddGestor.value.cnpj = this.cnpj;
         this.administracaoService.postGestor(fAddGestor.value).subscribe(
           res => {
             console.log(res);
@@ -194,70 +196,70 @@ export class GestorAddEditComponent implements OnInit {
     }
   }
 
-  // // função para Salvar os endereço do gestor
-  // salvarEndereco(fAddEndereco) {
-  //   if (fAddEndereco.status !== 'INVALID') {
-  //     if (this.putPermitido) {
-  //       this.putPermitido = false;
-  //       this.administracaoService.putEndereco(fAddEndereco.value, this.paramsById()).subscribe(
-  //         res => {
-  //           this.getContatoById();
-  //           this.contatoActive = true;
-  //         },
-  //         erro => {
-  //           console.log(erro);
-  //         }
-  //       );
-  //     } else {
-  //       fAddEndereco.value.cpf = this.paramsById();
-  //       this.administracaoService.postEndereco(fAddEndereco.value).subscribe(
-  //         res => {
-  //           console.log(res);
-  //           this.paramsByPost = res;
-  //           this.contatoActive = true;
-  //         },
-  //         erro => {
-  //           console.log(erro);
-  //         }
-  //       );
-  //     }
-  //     this.getContatoById();
-  //   } else {
-  //     console.log('campos inválidos');
-  //   }
-  //   this.contatoActive = true;
-  // }
+  // função para Salvar os endereço do gestor
+  salvarEndereco(fAddEndereco) {
+    if (fAddEndereco.status !== 'INVALID') {
+      if (this.putPermitido) {
+        this.putPermitido = false;
+        this.administracaoService.putEndereco(fAddEndereco.value, this.paramsById()).subscribe(
+          res => {
+            // this.getContatoById();
+            this.contatoActive = true;
+          },
+          erro => {
+            console.log(erro);
+          }
+        );
+      } else {
+        fAddEndereco.value.cpf = this.paramsById();
+        this.administracaoService.postEndereco(fAddEndereco.value).subscribe(
+          res => {
+            console.log(res);
+            this.paramsByPost = res;
+            this.contatoActive = true;
+          },
+          erro => {
+            console.log(erro);
+          }
+        );
+      }
+      // this.getContatoById();
+    } else {
+      console.log('campos inválidos');
+    }
+    this.contatoActive = true;
+  }
 
-  // // função para Salvar os contatos do gestor
-  // salvarContato(fAddContato) {
-  //   if (fAddContato.status !== 'INVALID') {
-  //     if (this.putPermitido) {
-  //       this.putPermitido = false;
-  //       this.administracaoService.putContato(fAddContato.value, this.paramsById()).subscribe(
-  //         res => {
-  //           this.instActive = true;
-  //         },
-  //         erro => {
-  //           console.log(erro);
-  //         }
-  //       );
-  //     } else {
-  //       fAddContato.value.cpf = this.paramsById();
-  //       this.administracaoService.postContato(fAddContato.value).subscribe(
-  //         res => {
-  //           this.paramsByPost = res;
-  //           this.instActive = true;
-  //         },
-  //         erro => {
-  //           console.log(erro);
-  //         }
-  //       );
-  //     }
-  //     this.getAbaInstituicoes();
-  //   } else {
-  //     console.log('campos inválidos');
-  //   }
-  // }
+  // função para Salvar os contatos do gestor
+  salvarContato(fAddContato) {
+    if (fAddContato.status !== 'INVALID') {
+      if (this.putPermitido) {
+        this.putPermitido = false;
+        this.administracaoService.putContato(fAddContato.value, this.paramsById()).subscribe(
+          res => {
+            this.instActive = true;
+          },
+          erro => {
+            console.log(erro);
+          }
+        );
+      } else {
+        fAddContato.value.cpf = this.paramsById();
+        this.administracaoService.postContato(fAddContato.value).subscribe(
+          res => {
+            this.paramsByPost = res;
+            this.instActive = true;
+          },
+          erro => {
+            console.log(erro);
+          }
+        );
+      }
+      this.getAbaInstituicoes();
+    } else {
+      console.log('campos inválidos');
+    }
+  }
 
   // // função para Salvar os contatos do gestor
   // salvarInstituicao(fAddInstituicao) {
