@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, OnChanges, Output, SimpleChanges, SimpleChange, OnDestroy } from '@angular/core';
+import { AppService } from './../../app.service';
+import { Component, OnInit } from '@angular/core';
 
 import { AdministracaoService } from '../administracao.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { destroyView } from '../../../../node_modules/@angular/core/src/view/view';
 
 @Component({
   selector: 'app-gestor-add-edit',
@@ -16,6 +16,8 @@ export class GestorAddEditComponent implements OnInit {
   BotoesPrincipais = true;
   perfisForm = false;
   DetalhePerfil = false;
+
+  ufs: any;
 
   params: any;
   paramsByPost: any;
@@ -106,7 +108,11 @@ export class GestorAddEditComponent implements OnInit {
   tipoInstsAbaInst: any;
   ufsAbaInst: any;
   municipiosAbaInst: any;
+  bairros: Object;
+  tipInsts: Object;
+  instsSau: Object;
   constructor(
+    private appService: AppService,
     private administracaoService: AdministracaoService,
     private activatedRoute: ActivatedRoute,
     private router: Router
@@ -458,24 +464,26 @@ export class GestorAddEditComponent implements OnInit {
 
   // ----- inicio Funções da aba instituições -----
   getInstituicao() {
-    this.administracaoService.getSelecioneInt()
-      .subscribe(dados => {
-        this.instituicoesAbaInst = dados;
-        this.saveDados.getInstituicao = dados;
-      });
+    // this.administracaoService.getSelecioneInt()
+    //   .subscribe(dados => {
+    //     this.instituicoesAbaInst = dados;
+    //     this.saveDados.getInstituicao = dados;
+    //   });
   }
 
   getTipoInst() {
     this.administracaoService.getSelecioneTipoInt().subscribe(dados => {
+      this.tipInsts = dados;
       this.tipoInstsAbaInst = dados;
       this.saveDados.getTipoInst = dados;
-      console.log(this.tipoInstsAbaInst);
     });
   }
 
-  getBairros() {
-    this.administracaoService.getSelecioneBairro().subscribe(dados => {
-      this.municipios = dados;
+  getBairros(idMunicipio) {
+    console.log(idMunicipio)
+    this.administracaoService.getSelecioneBairro(idMunicipio).subscribe(dados => {
+      console.log(dados);
+      this.bairros = dados;
       this.bairrosAbaInst = dados;
       this.tipoInstsAbaInst = dados;
       this.instituicoesAbaInst = dados;
@@ -483,10 +491,11 @@ export class GestorAddEditComponent implements OnInit {
   }
 
   getUfs() {
-    this.administracaoService.getSelecioneEstado().subscribe(dados => {
-      this.ufsAbaInst = dados;
-      this.saveDados.getUfs = dados;
-    });
+    this.ufs = this.appService.getUfs();
+  }
+
+  selectUf(codUf) {
+    this.municipios = this.appService.getMunicipios(codUf);
   }
 
   getMunicipio() {
@@ -494,6 +503,13 @@ export class GestorAddEditComponent implements OnInit {
       this.municipiosAbaInst = dados;
       this.saveDados.getMunicipio = dados;
     });
+  }
+
+  getInsts(form) {
+    this.administracaoService.getSelecioneInt(form.municipio, form.bairro, form.tipInst)
+    .subscribe(
+      res => this.instsSau = res
+    )
   }
 
 
@@ -586,10 +602,8 @@ export class GestorAddEditComponent implements OnInit {
 
   getAbaInstituicoes() {
     this.getInstituicao();
-    this.getTipoInst();
     this.getUfs();
     this.getMunicipio();
-    this.getBairros();
   }
 
   correcaoInstituicao() {
@@ -651,8 +665,16 @@ export class GestorAddEditComponent implements OnInit {
     this.DetalhePerfil = false;
   }
 
+  adicionarInstituicao(form) {
+    console.log(form);
+  }
+
   ngOnInit() {
-    this.getGestorInstituicao();
-    this.activatedRoute.params.subscribe(res => (this.params = res));
+    setTimeout(() => {
+      //this.getGestorInstituicao();
+      this.activatedRoute.params.subscribe(res => (this.params = res));
+      this.getUfs();
+      this.getTipoInst();
+    }, 1000);
   }
 }

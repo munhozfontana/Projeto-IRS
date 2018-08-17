@@ -1,6 +1,6 @@
+import { AuthenticationService } from './../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
-
-import { SuiCheckboxModule, SuiRatingModule } from 'ng2-semantic-ui';
+import { Router } from '../../../node_modules/@angular/router';
 
 
 @Component({
@@ -10,7 +10,17 @@ import { SuiCheckboxModule, SuiRatingModule } from 'ng2-semantic-ui';
 })
 export class LoginComponent implements OnInit {
 
-    constructor() { }
+    constructor(
+        private authenticationService: AuthenticationService,
+        private router: Router
+    ) { }
+
+    fazerLogin(form) {
+        this.authenticationService.login(form.value)
+        .subscribe(
+            res => this.router.navigate(['home'])
+        )
+    }
 
     ngOnInit() {
     }

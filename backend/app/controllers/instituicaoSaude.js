@@ -20,7 +20,7 @@ module.exports.municipio = function (application, req, res) {
     var conexaoPool = application.config.dbConnection();
     var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
 
-    model.getMunicipio(function (error, result) {
+    model.getMunicipios(function (error, result) {
         if (error) {
             console.log(error);
             res.status(400).send(error);
@@ -35,7 +35,9 @@ module.exports.bairros = function (application, req, res) {
     var conexaoPool = application.config.dbConnection();
     var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
 
-    model.getBairros(function (error, result) {
+    var idMunicipio = req.params.id;
+
+    model.getBairros(idMunicipio, function (error, result) {
         if (error) {
             console.log(error);
             res.status(400).send(error);
@@ -65,8 +67,11 @@ module.exports.instituicao = function (application, req, res) {
 
     var conexaoPool = application.config.dbConnection();
     var model = new application.app.models.instituicaoSaudeDAO(conexaoPool);
+    var municipio = req.params.municipio, 
+    bairro = req.params.bairro, 
+    tipo = req.params.tipo;
 
-    model.getInstituicao(function (error, result) {
+    model.getInstituicao(municipio, bairro, tipo,function (error, result) {
         if (error) {
             console.log(error);
             res.status(400).send(error);

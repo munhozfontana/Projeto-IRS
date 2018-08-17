@@ -9,7 +9,8 @@ const connectMYSQL = () => {
 	return mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
-		password: 'MyNewPass',
+		password: 'root',
+		database: 'sistemagestaodb',
 		port: 3306,
 		multipleStatements: true
 	});
@@ -18,6 +19,5 @@ const connectMYSQL = () => {
 
 //Retorna a conexão.
 module.exports = () => {
-	console.log(connectMYSQL);
 	return connectMYSQL;
 };
